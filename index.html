@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮光夏夢 REVERIE - 114級班展</title>
+    <style>
+        /* 基礎全域設定 */
+        :root {
+            --primary-color: #a29bfe;
+            --text-color: #333;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+        }
+        body, html { margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f8f9fa; color: var(--text-color); overflow-x: hidden; }
+        * { box-sizing: border-box; }
+        
+        /* 浮動動畫效果 */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-element {
+            animation: floating 3s ease-in-out infinite;
+            display: block;
+            margin: 20px auto;
+            max-width: 80%;
+            border-radius: 10px;
+        }
+
+        /* 導覽列 */
+        header { 
+            display: none; 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 10px; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            backdrop-filter: blur(5px);
+        }
+        .nav-container { 
+            display: flex; 
+            justify-content: flex-start; 
+            overflow-x: auto; 
+            gap: 8px; 
+            padding-bottom: 5px;
+            white-space: nowrap;
+        }
+        /* 隱藏捲軸但可滑動 */
+        .nav-container::-webkit-scrollbar { display: none; }
+        
+        .nav-btn { 
+            padding: 8px 15px; 
+            border: 1px solid #ddd; 
+            background: white; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-size: 14px; 
+            transition: 0.3s;
+        }
+        .nav-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+
+        /* 區塊顯示控制 */
+        .section { display: none; padding: 80px 20px 40px 20px; min-height: 100vh; }
+        .section.active { display: block; }
+
+        /* 入口畫面 (帶入主視覺) */
+        #landing { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            padding: 0; 
+            background-image: url('主視覺_0714最終版 (1).jpg'); 
+            background-size: cover; 
+            background-position: center; 
+        }
+        .landing-overlay { 
+            background: var(--glass-bg); 
+            padding: 40px 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+            width: 85%; 
+            max-width: 400px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        .landing-overlay h2 { margin-top: 0; font-spacing: 2px; }
+        .main-btn { 
+            display: block; 
+            width: 100%; 
+            padding: 15px; 
+            margin: 12px 0; 
+            font-size: 16px; 
+            font-weight: bold;
+            border: none; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            background: #4a4a4a; 
+            color: white; 
+            transition: 0.2s;
+        }
+        
+        /* 表單與卡片設計 */
+        .card { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            margin-bottom: 25px; 
+        }
+        h3 { margin-top: 0; color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        input, select, button.submit-btn { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 8px; 
+            margin-bottom: 20px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            font-size: 15px;
+        }
+        .submit-btn { background: var(--primary-color); color: white; font-weight: bold; border: none; }
+
+        /* 周計畫樣式 (C區) */
+        .weekly-planner { display: flex; flex-direction: column; gap: 10px; }
+        .day-card { background: #f9f9f9; padding: 15px; border-left: 5px solid var(--primary-color); border-radius: 8px; }
+        .day-title { font-weight: bold; margin-bottom: 5px; }
+        .day-event { font-size: 14px; color: #555; }
+
+    </style>
+</head>
+<body>
+
+    <!-- 首頁入口 -->
+    <div id="landing" class="section active">
+        <div class="landing-overlay">
+            <h2>浮光夏夢<br><small>REVERIE</small></h2>
+            <p>114級班展 網站系統</p>
+            <button class="main-btn" onclick="enterSite('staff')">工作人員入口</button>
+            <button class="main-btn" onclick="enterSite('visitor')">看展者入口</button>
+        </div>
+    </div>
+
+    <!-- 頂部導覽列 (可左右滑動) -->
+    <header id="main-header">
+        <div class="nav-container" id="staff-nav">
+            <button class="nav-btn active" onclick="switchTab('tab-A', event)">展場圖</button>
+            <button class="nav-btn" onclick="switchTab('tab-B', event)">快閃排班</button>
+            <button class="nav-btn" onclick="switchTab('tab-C', event)">展覽理念</button>
+            <button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button>
+            <button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- A: 展場圖 -->
+        <div id="tab-A" class="section">
+            <div class="card">
+                <h3>展場動線與作品</h3>
+                <p>點擊編號可查看理念與社群連結。</p>
+                <!-- 預留放展場圖的空間 -->
+                <img src="面紙_正面.jpg" class="float-element" alt="視覺裝飾">
+            </div>
+        </div>
+
+        <!-- B: 快閃排班 -->
+        <div id="tab-B" class="section">
+            <div class="card">
+                <h3>快閃排班時段</h3>
+                <p>請選擇您的空堂時段 (共需選5個)：</p>
+                <form id="shift-form">
+                    <label>姓名 / 學號：</label>
+                    <input type="text" placeholder="請輸入..." required>
+                    <label>選擇時段：</label>
+                    <select multiple style="height: 120px;" required>
+                        <option>9/21 (一) 10:00-12:00</option>
+                        <option>9/21 (一) 13:00-15:00</option>
+                        <option>9/22 (二) 10:00-12:00</option>
+                        <option>9/23 (三) 13:00-15:00</option>
+                        <option>9/24 (四) 15:00-17:00</option>
+                    </select>
+                    <p style="font-size: 12px; color: #888;">*按住電腦的 Ctrl / 手機長按可多選</p>
+                    <button type="submit" class="submit-btn">送出至資料庫</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- C: 展場理念介紹 (周計畫呈現) -->
+        <div id="tab-C" class="section">
+            <div class="card">
+                <h3>展覽時程計畫</h3>
+                <div class="weekly-planner">
+                    <div class="day-card">
+                        <div class="day-title">9/28 (一) - 9/29 (二)</div>
+                        <div class="day-event">🔧 展場佈置時段</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-title">9/30 (三)</div>
+                        <div class="day-event">✨ 12:00-14:00 開幕茶會</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-title">9/30 (三) - 10/4 (日)</div>
+                        <div class="day-event">🖼️ 正式展期 (09:00-18:00)</div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-title">10/5 (一)</div>
+                        <div class="day-event">📦 撤展時段</div>
+                    </div>
+                </div>
+                <img src="coming soon 三格圖-中.jpg" class="float-element" alt="coming soon">
+            </div>
+        </div>
+
+        <!-- D: 快閃人員須知 -->
+        <div id="tab-D" class="section">
+            <div class="card">
+                <h3>快閃活動規範</h3>
+                <ul>
+                    <li><strong>調飲比例：</strong> (待填寫)</li>
+                    <li><strong>扭蛋規則：</strong> (待填寫)</li>
+                </ul>
+                <img src="有切割線.jpg" style="width: 100%; border-radius: 8px; margin-top: 15px;" alt="裝飾元素">
+            </div>
+        </div>
+
+        <!-- E: 周邊販賣情況 -->
+        <div id="tab-E" class="section">
+            <div class="card">
+                <h3>周邊快速結帳登記</h3>
+                <form id="merch-form">
+                    <label>購買者學號：</label>
+                    <input type="text" placeholder="例如：110xxxxxx" required>
+                    <label>購買品項：</label>
+                    <select required>
+                        <option value="壓克力吊飾">壓克力吊飾</option>
+                        <option value="專屬貼紙">專屬貼紙</option>
+                    </select>
+                    <button type="submit" class="submit-btn">快速登記 (自動紀錄時間)</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 進入網站的權限判定
+        function enterSite(role) {
+            document.getElementById('landing').classList.remove('active');
+            document.getElementById('main-header').style.display = 'block';
+            
+            // 如果是看展者，重新渲染導覽列，隱藏工作人員專屬功能
+            if(role === 'visitor') {
+                document.getElementById('staff-nav').innerHTML = `
+                    <button class="nav-btn active" onclick="switchTab('tab-A', event)">展場圖</button>
+                    <button class="nav-btn" onclick="switchTab('tab-C', event)">展覽理念</button>
+                `;
+            }
+            switchTab('tab-A', null); 
+            
+            // 將第一個按鈕設為啟動狀態
+            const firstBtn = document.querySelector('.nav-btn');
+            if(firstBtn) firstBtn.classList.add('active');
+        }
+
+        // 頁籤切換功能
+        function switchTab(tabId, event) {
+            const sections = document.querySelectorAll('main .section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            if(event) {
+                const btns = document.querySelectorAll('.nav-btn');
+                btns.forEach(btn => btn.classList.remove('active'));
+                event.currentTarget.classList.add('active');
+                
+                // 讓被點擊的按鈕自動滑動到畫面可視範圍內 (優化手機體驗)
+                event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        }
+
+        // 防止表單跳轉並加入測試提醒
+        document.getElementById('shift-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('排班資料已暫存！未來將在此串接 Google 試算表寫入功能。');
+        });
+
+        document.getElementById('merch-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const now = new Date();
+            const timeString = now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
+            alert('登記成功！結帳時間紀錄為：' + timeString);
+        });
+    </script>
+</body>
+</html>
