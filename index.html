@@ -655,13 +655,7 @@
             formData.append('name', document.getElementById('shift-name-popup').value);
             formData.append('shifts', selectedShifts.join(', '));
 
-            // 防呆提示，避免你忘記填寫網址
-            if (GOOGLE_SCRIPT_URL.includes('https://script.google.com/macros/s/AKfycbxYM4yRxNwEKZ6tWz5DDXw6QDOg7KX-nzyQOo4oTGRlvIiusP2il9lBJt7FvKvfU6tZ/exec')) {
-                alert('請先在程式碼最上方填入 Google Apps Script 網址！');
-                submitBtn.innerText = '送出至 Google 試算表';
-                submitBtn.style.opacity = '1';
-                submitBtn.disabled = false;
-                return;
+        
             }
 
             fetch(GOOGLE_SCRIPT_URL, {
