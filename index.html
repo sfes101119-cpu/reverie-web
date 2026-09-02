@@ -315,24 +315,34 @@
     </div>
 
     <script>
+        // 👇 就是這行！請把你在步驟二取得的 Google Apps Script 網址貼在單引號裡面 👇
+        const GOOGLE_SCRIPT_URL = '請在這裡貼上你的_Google_Apps_Script_部署網址'; 
+
         let currentUser = null;
         let customLinks = JSON.parse(localStorage.getItem('reverie_custom_links') || '{}'); 
 
+        // 更新後的身分組名單 (已自動過濾並設定權限)
         const staffData = {
             "11210831": { name: "林珈年", group: "公關組", role: "curator" },
-            "11310836": { name: "高顥禎", group: "美宣組", role: "curator" },
+            "11310836": { name: "高顥禎", group: "作品人", role: "creator" },
             "11410801": { name: "蘇苗元", group: "美宣組", role: "curator" },
+            "11410802": { name: "蔡睿芯", group: "作品人", role: "creator" },
             "11410803": { name: "賴昱蓁", group: "展管組", role: "curator" },
             "11410804": { name: "李軒妤", group: "展管組", role: "curator" },
             "11410805": { name: "林千又", group: "公關組", role: "curator" },
             "11410806": { name: "黃珊妮", group: "召集組", role: "curator" },
             "11410807": { name: "林宇鑫", group: "場佈組", role: "curator" },
             "11410808": { name: "祝承鈺", group: "場佈組", role: "curator" },
+            "11410809": { name: "江安嫻", group: "作品人", role: "creator" },
             "11410810": { name: "林妍蓁", group: "活動組", role: "curator" },
             "11410812": { name: "李子睿", group: "展管組", role: "curator" },
+            "11410813": { name: "謝其聿", group: "作品人", role: "creator" },
             "11410814": { name: "蔡侑恩", group: "場佈組", role: "curator" },
             "11410815": { name: "涂承軒", group: "場佈組", role: "curator" },
             "11410816": { name: "林晏孜", group: "公關組", role: "curator" },
+            "11410817": { name: "陳彥錡", group: "作品人", role: "creator" },
+            "11410818": { name: "何惠俞", group: "作品人", role: "creator" },
+            "11410819": { name: "林少棻", group: "作品人", role: "creator" },
             "11410824": { name: "張予彤", group: "活動組", role: "curator" },
             "11410825": { name: "區嘉倩", group: "活動組", role: "curator" },
             "11410827": { name: "王芷歆", group: "場佈組", role: "curator" },
@@ -350,11 +360,10 @@
             "11410841": { name: "徐蒂亞", group: "展管組", role: "curator" },
             "11410842": { name: "洪叔妤", group: "活動組", role: "curator" },
             "11410843": { name: "陳姿羽", group: "展管組", role: "curator" },
-            "11410844": { name: "張瑜倢", group: "美宣組", role: "curator" },
             "11410845": { name: "黃庭芸", group: "活動組", role: "curator" },
             "11410846": { name: "翁啟洲", group: "場佈組", role: "curator" },
             "11410848": { name: "劉心伃", group: "召集組", role: "curator" },
-            "00000000": { name: "測試展出者", group: "一般人員", role: "creator" } 
+            "00000000": { name: "測試展出者", group: "作品人", role: "creator" } 
         };
 
         const merchData = [
@@ -565,7 +574,7 @@
             e.preventDefault();
             const pwdInput = prompt('請輸入您的個人密碼以確認送出結帳：');
             
-            if (pwdInput === null) return; // 使用者按下取消
+            if (pwdInput === null) return; 
             
             if (pwdInput === getUserPassword(currentUser.id)) {
                 const time = new Date();
@@ -632,10 +641,46 @@
             });
         });
         
+        // 替換原本的 submitShift 函數為串接 API 的版本
         function submitShift(e, type) {
             e.preventDefault();
             if(selectedShifts.length < 5) return alert('排班資料不完整：請至少選擇 5 個空堂時段喔！');
-            alert(`排班暫存成功！\n共選擇了 ${selectedShifts.length} 個時段。\n(未來將寫入試算表)`);
+
+            const submitBtn = e.target.querySelector('.submit-btn');
+            submitBtn.innerText = '資料傳送中...';
+            submitBtn.style.opacity = '0.7';
+            submitBtn.disabled = true;
+
+            const formData = new FormData();
+            formData.append('name', document.getElementById('shift-name-popup').value);
+            formData.append('shifts', selectedShifts.join(', '));
+
+            // 防呆提示，避免你忘記填寫網址
+            if (GOOGLE_SCRIPT_URL.includes('請在這裡貼上')) {
+                alert('請先在程式碼最上方填入 Google Apps Script 網址！');
+                submitBtn.innerText = '送出至 Google 試算表';
+                submitBtn.style.opacity = '1';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert(`✅ 排班暫存成功！\n共選擇了 ${selectedShifts.length} 個時段。\n(資料已成功寫入 Google 試算表)`);
+                submitBtn.innerText = '送出至 Google 試算表';
+                submitBtn.style.opacity = '1';
+                submitBtn.disabled = false;
+            })
+            .catch(error => {
+                alert('❌ 傳送失敗，請檢查網路連線或稍後再試。');
+                submitBtn.innerText = '送出至 Google 試算表';
+                submitBtn.style.opacity = '1';
+                submitBtn.disabled = false;
+            });
         }
 
         function showArtworkInfo(id, event) {
