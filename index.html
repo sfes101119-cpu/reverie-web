@@ -316,7 +316,7 @@
 
     <script>
         // 👇 就是這行！請把你在步驟二取得的 Google Apps Script 網址貼在單引號裡面 👇
-        const GOOGLE_SCRIPT_URL = '請在這裡貼上你的_Google_Apps_Script_部署網址'; 
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYM4yRxNwEKZ6tWz5DDXw6QDOg7KX-nzyQOo4oTGRlvIiusP2il9lBJt7FvKvfU6tZ/exec'; 
 
         let currentUser = null;
         let customLinks = JSON.parse(localStorage.getItem('reverie_custom_links') || '{}'); 
@@ -656,7 +656,7 @@
             formData.append('shifts', selectedShifts.join(', '));
 
             // 防呆提示，避免你忘記填寫網址
-            if (GOOGLE_SCRIPT_URL.includes('請在這裡貼上')) {
+            if (GOOGLE_SCRIPT_URL.includes('https://script.google.com/macros/s/AKfycbxYM4yRxNwEKZ6tWz5DDXw6QDOg7KX-nzyQOo4oTGRlvIiusP2il9lBJt7FvKvfU6tZ/exec')) {
                 alert('請先在程式碼最上方填入 Google Apps Script 網址！');
                 submitBtn.innerText = '送出至 Google 試算表';
                 submitBtn.style.opacity = '1';
