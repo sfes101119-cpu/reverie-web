@@ -49,7 +49,7 @@
 
         input.login-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
 
-        /* 系統導覽列 (加入智慧滑動特效) */
+        /* 系統導覽列 */
         header { 
             background: rgba(255, 255, 255, 0.95); padding: 10px; position: fixed; width: 100%; top: 0; z-index: 100; 
             box-shadow: 0 2px 10px rgba(0,0,0,0.05); backdrop-filter: blur(5px);
@@ -85,23 +85,30 @@
         .wall-u-top { top: 25%; left: 45%; width: 35%; height: 4%; }
         .wall-u-right { top: 25%; left: 76%; width: 4%; height: 32%; }
         .wall-u-bottom { top: 53%; left: 45%; width: 35%; height: 4%; }
+        .wall-3-bottom { top: 78%; left: 70%; width: 25%; height: 3%; } /* 編號 3 下方的牆壁橫線 */
+
         .map-entrance { position: absolute; top: 75%; left: 45%; font-size: 13px; font-weight: bold; color: #555; text-align: center; }
         .map-stairs { position: absolute; top: 62%; left: 16%; width: 12%; height: 25%; background: repeating-linear-gradient(to bottom, #dcdcdc, #dcdcdc 3px, #f4f6f8 3px, #f4f6f8 10px); border: 2px solid #aaa; border-bottom: none; }
-        .artwork-btn { position: absolute; width: 26px; height: 26px; background-color: #fff; color: var(--text-color); border: 2px solid var(--primary-color); border-radius: 50%; font-size: 12px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: 0.2s; transform: translate(-50%, -50%); display: flex; justify-content: center; align-items: center; padding: 0; }
+        .artwork-btn { position: absolute; width: 26px; height: 26px; background-color: #fff; color: var(--text-color); border: 2px solid var(--primary-color); border-radius: 50%; font-size: 11px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: 0.2s; transform: translate(-50%, -50%); display: flex; justify-content: center; align-items: center; padding: 0; z-index: 5; }
         .artwork-btn:hover, .artwork-btn.active-btn { transform: translate(-50%, -50%) scale(1.2); background-color: var(--primary-color); color: white; z-index: 10; }
 
-        /* 快閃排班 課表樣式 (絕對定位對齊時間) */
-        .schedule-wrapper { overflow-x: auto; background: var(--sch-bg); padding: 15px; border-radius: 15px; margin-bottom: 20px; box-shadow: inset 0 0 8px rgba(0,0,0,0.05); }
+        /* 快閃排班 課表樣式 */
+        .schedule-wrapper { overflow-x: auto; background: var(--sch-bg); padding: 15px; border-radius: 15px; margin-top: 10px; margin-bottom: 20px; box-shadow: inset 0 0 8px rgba(0,0,0,0.05); }
         .schedule-grid { display: grid; grid-template-columns: 40px repeat(4, 1fr); gap: 6px; min-width: 320px; }
-        .sch-time-col { position: relative; margin-top: 25px; height: 368px; }
+        .sch-time-col { position: relative; margin-top: 30px; height: 368px; }
         .time-label { position: absolute; right: 5px; font-size: 10px; color: var(--sch-red); font-weight: bold; line-height: 1; transform: translateY(-50%); }
         .sch-day-col { display: flex; flex-direction: column; gap: 6px; }
-        .sch-header { font-size: 12px; font-weight: bold; text-align: center; color: var(--sch-red); height: 19px; }
-        /* 固定按鈕高度40px，加上gap6px = 每格46px */
+        .sch-header { font-size: 12px; font-weight: bold; text-align: center; color: var(--sch-red); height: 24px; line-height: 1.2; display: flex; flex-direction: column; justify-content: center; }
         .shift-btn { background-color: var(--sch-dim); color: white; border: none; border-radius: 8px; height: 40px; display: block; width: 100%; font-size: 11px; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .shift-btn.selected { background-color: var(--sch-red); box-shadow: 0 2px 5px rgba(169, 27, 32, 0.4); transform: scale(0.98); }
 
-        /* 蝦皮周邊網格 */
+        /* 展覽時程表格樣式 */
+        .custom-schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+        .custom-schedule-table th, .custom-schedule-table td { border: 1px solid #f0f0f0; padding: 10px 8px; text-align: left; }
+        .custom-schedule-table th { background-color: #fff3f5; color: var(--sch-red); font-weight: bold; }
+        .custom-schedule-table tr:nth-child(even) { background-color: #fafafa; }
+
+        /* 周邊網格 */
         .merch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
         .merch-item { background: white; border: 1px solid #eee; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
         .merch-img-placeholder { width: 100%; aspect-ratio: 1; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999; }
@@ -120,7 +127,6 @@
 
     <div class="bg-layer"></div>
 
-    <!-- 首頁入口 -->
     <div id="page-landing" class="page active">
         <div class="glass-panel">
             <h2 style="color: var(--primary-color);">浮光夏夢<br><small style="color: #666;">REVERIE</small></h2>
@@ -130,7 +136,6 @@
         </div>
     </div>
 
-    <!-- 登入頁 -->
     <div id="page-login" class="page">
         <div class="glass-panel">
             <h3 style="color: var(--primary-color);">工作人員登入</h3>
@@ -142,9 +147,7 @@
         </div>
     </div>
 
-    <!-- 系統介面 -->
     <div id="page-system" class="page">
-        <!-- 導覽列 -->
         <header id="main-header">
             <div class="user-info-bar">
                 <span style="font-weight: bold;">REVERIE 工作區</span>
@@ -154,7 +157,6 @@
         </header>
 
         <main>
-            <!-- A: 展場圖 -->
             <div id="tab-A" class="section">
                 <div class="sticky-header">
                     <h3>展場動線與作品</h3>
@@ -163,38 +165,41 @@
                 
                 <div class="card" style="padding: 10px; background: rgba(255,255,255,0.8);">
                     <div class="map-container">
-                        <div class="wall wall-left"></div><div class="wall wall-u-top"></div><div class="wall wall-u-right"></div><div class="wall wall-u-bottom"></div>
-                        <div class="map-stairs"></div><div class="map-entrance">⬆ 入口</div>
+                        <div class="wall wall-left"></div>
+                        <div class="wall wall-u-top"></div>
+                        <div class="wall wall-u-right"></div>
+                        <div class="wall wall-u-bottom"></div>
+                        <div class="wall wall-3-bottom"></div> <div class="map-stairs"></div>
+                        <div class="map-entrance">⬆ 入口</div>
                         
                         <button class="artwork-btn" style="top: 6%; left: 80%;" onclick="showArtworkInfo(1, event)">1</button>
-                        <button class="artwork-btn" style="top: 30%; left: 55%;" onclick="showArtworkInfo(2, event)">2</button>
-                        <button class="artwork-btn" style="top: 70%; left: 80%;" onclick="showArtworkInfo(3, event)">3</button>
-                        <button class="artwork-btn" style="top: 45%; left: 25%;" onclick="showArtworkInfo(4, event)">4</button>
-                        <button class="artwork-btn" style="top: 60%; left: 95%;" onclick="showArtworkInfo(5, event)">5</button>
-                        <button class="artwork-btn" style="top: 40%; left: 95%;" onclick="showArtworkInfo(6, event)">6</button>
-                        <button class="artwork-btn" style="top: 50%; left: 95%;" onclick="showArtworkInfo(7, event)">7</button>
-                        <button class="artwork-btn" style="top: 25%; left: 95%;" onclick="showArtworkInfo(8, event)">8</button>
-                        <button class="artwork-btn" style="top: 30%; left: 85%;" onclick="showArtworkInfo(9, event)">9</button>
-                        <button class="artwork-btn" style="top: 6%; left: 95%;" onclick="showArtworkInfo(10, event)">10</button>
-                        <button class="artwork-btn" style="top: 6%; left: 88%;" onclick="showArtworkInfo(11, event)">11</button>
-                        <button class="artwork-btn" style="top: 40%; left: 70%;" onclick="showArtworkInfo(12, event)">12</button>
-                        <button class="artwork-btn" style="top: 50%; left: 50%;" onclick="showArtworkInfo(13, event)">13</button>
-                        <button class="artwork-btn" style="top: 20%; left: 70%;" onclick="showArtworkInfo(14, event)">14</button>
-                        <button class="artwork-btn" style="top: 50%; left: 70%;" onclick="showArtworkInfo(15, event)">15</button>
+                        <button class="artwork-btn" style="top: 32%; left: 55%;" onclick="showArtworkInfo(2, event)">2</button>
+                        <button class="artwork-btn" style="top: 72%; left: 80%;" onclick="showArtworkInfo(3, event)">3</button>
+                        <button class="artwork-btn" style="top: 48%; left: 25%;" onclick="showArtworkInfo(4, event)">4</button>
+                        <button class="artwork-btn" style="top: 68%; left: 92%;" onclick="showArtworkInfo(5, event)">5</button>
+                        <button class="artwork-btn" style="top: 40%; left: 92%;" onclick="showArtworkInfo(6, event)">6</button>
+                        <button class="artwork-btn" style="top: 54%; left: 92%;" onclick="showArtworkInfo(7, event)">7</button>
+                        <button class="artwork-btn" style="top: 22%; left: 92%;" onclick="showArtworkInfo(8, event)">8</button>
+                        <button class="artwork-btn" style="top: 32%; left: 82%;" onclick="showArtworkInfo(9, event)">9</button>
+                        <button class="artwork-btn" style="top: 6%; left: 92%;" onclick="showArtworkInfo(10, event)">10</button>
+                        <button class="artwork-btn" style="top: 6%; left: 70%;" onclick="showArtworkInfo(11, event)">11</button>
+                        <button class="artwork-btn" style="top: 38%; left: 70%;" onclick="showArtworkInfo(12, event)">12</button>
+                        <button class="artwork-btn" style="top: 52%; left: 48%;" onclick="showArtworkInfo(13, event)">13</button>
+                        <button class="artwork-btn" style="top: 18%; left: 80%;" onclick="showArtworkInfo(14, event)">14</button>
+                        <button class="artwork-btn" style="top: 52%; left: 70%;" onclick="showArtworkInfo(15, event)">15</button>
                         <button class="artwork-btn" style="top: 15%; left: 35%;" onclick="showArtworkInfo(16, event)">16</button>
-                        <button class="artwork-btn" style="top: 6%; left: 25%;" onclick="showArtworkInfo(17, event)">17</button>
-                        <button class="artwork-btn" style="top: 6%; left: 55%;" onclick="showArtworkInfo(18, event)">18</button>
-                        <button class="artwork-btn" style="top: 6%; left: 45%;" onclick="showArtworkInfo(19, event)">19</button>
-                        <button class="artwork-btn" style="top: 40%; left: 55%;" onclick="showArtworkInfo(20, event)">20</button>
-                        <button class="artwork-btn" style="top: 50%; left: 60%;" onclick="showArtworkInfo(21, event)">21</button>
-                        <button class="artwork-btn" style="top: 25%; left: 85%;" onclick="showArtworkInfo(22, event)">22</button>
-                        <button class="artwork-btn" style="top: 6%; left: 65%;" onclick="showArtworkInfo(23, event)">23</button>
-                        <button class="artwork-btn" style="top: 45%; left: 95%;" onclick="showArtworkInfo(24, event)">24</button>
-                        <button class="artwork-btn" style="top: 25%; left: 25%;" onclick="showArtworkInfo(25, event)">25</button>
-                        <button class="artwork-btn" style="top: 45%; left: 85%;" onclick="showArtworkInfo(26, event)">26</button>
+                        <button class="artwork-btn" style="top: 6%; left: 15%;" onclick="showArtworkInfo(17, event)">17</button>
+                        <button class="artwork-btn" style="top: 6%; left: 52%;" onclick="showArtworkInfo(18, event)">18</button>
+                        <button class="artwork-btn" style="top: 6%; left: 35%;" onclick="showArtworkInfo(19, event)">19</button>
+                        <button class="artwork-btn" style="top: 40%; left: 58%;" onclick="showArtworkInfo(20, event)">20</button>
+                        <button class="artwork-btn" style="top: 52%; left: 58%;" onclick="showArtworkInfo(21, event)">21</button>
+                        <button class="artwork-btn" style="top: 20%; left: 82%;" onclick="showArtworkInfo(22, event)">22</button>
+                        <button class="artwork-btn" style="top: 6%; left: 60%;" onclick="showArtworkInfo(23, event)">23</button>
+                        <button class="artwork-btn" style="top: 46%; left: 82%;" onclick="showArtworkInfo(24, event)">24</button>
+                        <button class="artwork-btn" style="top: 28%; left: 25%;" onclick="showArtworkInfo(25, event)">25</button>
+                        <button class="artwork-btn" style="top: 60%; left: 82%;" onclick="showArtworkInfo(26, event)">26</button>
                     </div>
 
-                    <!-- 作品資訊顯示區塊 -->
                     <div id="artwork-info-panel" style="display: none; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
                         <h4 id="art-title" style="margin-top: 0; margin-bottom: 5px; color: var(--primary-color); font-size: 18px; line-height: 1.4;"></h4>
                         <p style="font-size: 14px; color: #555; margin-top: 0; margin-bottom: 8px;">
@@ -208,7 +213,6 @@
                 </div>
             </div>
 
-            <!-- B: 快閃排班 (限 curator) -->
             <div id="tab-B" class="section">
                 <div class="sticky-header">
                     <h3>快閃排班 (9/21-9/24)</h3>
@@ -216,13 +220,11 @@
                 </div>
                 <div class="card">
                     <form onsubmit="submitShift(event, 'pop-up')">
-                        <label>排班人員：</label>
+                        <label style="font-size:14px; font-weight:bold;">排班人員：</label>
                         <input type="text" id="shift-name-popup" class="general-input" readonly style="background:#f4f6f8;">
                         
-                        <!-- 課表網格 -->
                         <div class="schedule-wrapper">
                             <div class="schedule-grid">
-                                <!-- 精準對齊時間軸 -->
                                 <div class="sch-time-col">
                                     <div class="time-label" style="top: 0px;">10:00</div>
                                     <div class="time-label" style="top: 46px;">11:00</div>
@@ -249,13 +251,11 @@
                 </div>
             </div>
 
-            <!-- F: 展期排班 (全體工作人員) -->
             <div id="tab-F" class="section">
                 <div class="sticky-header"><h3>展期排班 (9/30-10/4)</h3></div>
                 <div class="card"><p style="font-size:13px; color:#555;">(結構與快閃排班相同，未來可填入展期對應時段)</p></div>
             </div>
 
-            <!-- C: 展覽理念與時程 -->
             <div id="tab-C" class="section">
                 <div class="sticky-header"><h3 id="schedule-title">展覽時程計畫</h3></div>
                 <div class="card">
@@ -267,18 +267,15 @@
                 <div class="card" id="schedule-card-content"></div>
             </div>
 
-            <!-- D: 人員須知 -->
             <div id="tab-D" class="section">
                 <div class="sticky-header"><h3>人員須知</h3></div>
                 <div class="card" id="rules-card-content"></div>
             </div>
 
-            <!-- E: 浮光周邊 -->
             <div id="tab-E" class="section">
                 <div class="sticky-header"><h3 id="merch-title">浮光周邊</h3></div>
-                <!-- 結帳區 (僅工作人員可見) -->
-                <div class="card" id="staff-checkout-area" style="display:none; background:#fff3f5; border: 1px solid #f4a6b9;">
-                    <h4 style="margin-top:0; color:#a91b20;">工作人員：快速結帳登記</h4>
+                <div class="card" id="staff-checkout-area" style="display:none; background: rgba(255, 255, 255, 0.8); border: none;">
+                    <h4 style="margin-top:0; color: var(--primary-color);">工作人員：快速結帳登記</h4>
                     <form onsubmit="submitMerch(event)">
                         <label style="font-size:13px; color:#555;">自動帶入經手人資訊：</label>
                         <input type="text" id="merch-staff-info" class="general-input" readonly style="background:#eee; font-weight:bold;">
@@ -291,17 +288,15 @@
                         <button type="submit" class="submit-btn" style="margin-bottom:0;">送出結帳紀錄</button>
                     </form>
                 </div>
-                <!-- 蝦皮網格 -->
                 <div class="merch-grid" id="merch-list"></div>
             </div>
         </main>
     </div>
 
-    <!-- 個人設定模態框 -->
     <div id="modal-profile" class="modal-overlay">
         <div class="modal-content">
             <h3 style="color:var(--primary-color); margin-top:0;">個人設定</h3>
-            <p style="font-size:12px; color:#888;">(網頁重新整理後將恢復預設)</p>
+            <p style="font-size:12px; color:#888;">(設定修改後將永久儲存於本機系統)</p>
             
             <label style="font-size:14px; font-weight:bold;">修改登入密碼：</label>
             <input type="password" id="setting-pwd" class="general-input" placeholder="輸入新密碼">
@@ -321,9 +316,8 @@
 
     <script>
         let currentUser = null;
-        let customLinks = {}; 
+        let customLinks = JSON.parse(localStorage.getItem('reverie_custom_links') || '{}'); 
 
-        // 35 位名單 (策展組/幹部設為 curator，一般人員設為 creator)
         const staffData = {
             "11210831": { name: "林珈年", group: "公關組", role: "curator" },
             "11310836": { name: "高顥禎", group: "美宣組", role: "curator" },
@@ -372,7 +366,6 @@
             { name: "導覽三折頁", price: 0, desc: "展場現場獲得", stock: 500 }
         ];
 
-        // 完整 25 個展場理念
         const exhibitionData = {
             1: { title: "THE SUSPENDED GENERATION", author: "林千又", media: "Illustrator", size: "A3", concept: "本作品以「懸浮世代」為主題，探討現代年輕人在快速變動的社會中所面臨的迷惘與焦慮。透過〈Drifting〉、〈Pressure〉與〈Dissolve〉三部曲，主要以字體設計呈現個體在城市中尋找定位卻無所依歸的漂流狀態，逐漸被現實與期待擠壓，最終在長期消耗下失去自我、逐漸消散的過程。" },
             2: { title: "建置中", author: "-", media: "-", size: "-", concept: "資料準備中" },
@@ -405,13 +398,23 @@
         function goToLogin() { document.getElementById('page-landing').classList.remove('active'); document.getElementById('page-login').classList.add('active'); }
         function goBackLanding() { document.getElementById('page-login').classList.remove('active'); document.getElementById('page-landing').classList.add('active'); document.getElementById('login-id').value = ''; document.getElementById('login-pwd').value = ''; }
         
+        /* 取得目前的儲存密碼 (支援 LocalStorage 記憶機制) */
+        function getUserPassword(id) {
+            const savedPwd = localStorage.getItem('user_pwd_' + id);
+            if (savedPwd) return savedPwd;
+            return staffData[id].newPwd || '114';
+        }
+
         function verifyLogin() {
             const id = document.getElementById('login-id').value.replace(/\s+/g, '');
             const pwd = document.getElementById('login-pwd').value.replace(/\s+/g, '');
-            if (staffData[id] && (pwd === '114' || pwd === staffData[id].newPwd)) { 
+            
+            if (staffData[id] && pwd === getUserPassword(id)) { 
                 currentUser = { id: id, ...staffData[id] };
                 enterSystem('staff', `${currentUser.group} ${currentUser.name} ⚙️`); 
-            } else { alert('學號或密碼錯誤。'); }
+            } else { 
+                alert('學號或密碼錯誤。'); 
+            }
         }
 
         function enterSystem(type, badgeName) {
@@ -428,18 +431,15 @@
                 document.getElementById('staff-checkout-area').style.display = 'block';
                 
                 if(currentUser.role === 'curator') {
-                    // 策展組/幹部：全部顯示
                     nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-B', event)">快閃排班</button><button class="nav-btn" onclick="switchTab('tab-F', event)">展期排班</button><button class="nav-btn" onclick="switchTab('tab-C', event)">理念/排程</button><button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button><button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button>`;
                     document.getElementById('shift-name-popup').value = currentUser.name;
                 } else {
-                    // 一般展出者：隱藏快閃排班
                     nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-F', event)">展期排班</button><button class="nav-btn" onclick="switchTab('tab-C', event)">理念/排程</button><button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button><button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button>`;
                 }
                 renderSchedule('staff');
                 renderRules('staff');
                 renderMerch('staff');
             } else {
-                // 訪客：僅顯示展場、時程、型錄
                 nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-C', event)">展覽時程</button><button class="nav-btn" onclick="switchTab('tab-E', event)">浮光周邊</button>`;
                 document.getElementById('staff-checkout-area').style.display = 'none';
                 renderSchedule('visitor');
@@ -459,6 +459,7 @@
             }
         }
 
+        /* 渲染時程表與新增表格 */
         function renderSchedule(type) {
             const container = document.getElementById('schedule-card-content');
             let html = `<h4 style="color:var(--primary-color); font-size:16px; margin-top:0;">詳細時程表</h4><div class="weekly-planner">`;
@@ -476,14 +477,75 @@
                 html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">10/4 (日) 18:00-21:00</div><div style="font-size:14px; color:#555;">📦 撤展 (作品想先拿可先拿走)</div></div>`;
                 html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px;"><div style="font-weight:bold;">10/5 (一) 08:00-12:00</div><div style="font-size:14px; color:#555;">📦 撤展完畢 (10-12有系必修網站規劃)</div></div>`;
             }
-            container.innerHTML = html + `</div>`;
+            
+            html += `</div>`;
+
+            /* 新增區塊：展覽每日時間表 */
+            html += `
+            <div style="margin-top:25px; border-top: 1px dashed #ddd; padding-top:15px;">
+                <h4 style="color:var(--primary-color); font-size:16px; margin-top:0;">展覽活動每日流程總覽表</h4>
+                <table class="custom-schedule-table">
+                    <thead>
+                        <tr>
+                            <th>階段 / 日期</th>
+                            <th>開放時間</th>
+                            <th>主要事項</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>快閃期</strong> (9/21 - 9/24)</td>
+                            <td>10:00 - 18:00</td>
+                            <td>特調飲品販售、扭蛋活動</td>
+                        </tr>
+                        <tr>
+                            <td><strong>場佈日</strong> (9/29)</td>
+                            <td>12:00 - 21:00</td>
+                            <td>展場進駐、作品安裝工程</td>
+                        </tr>
+                        <tr>
+                            <td><strong>首日開放</strong> (9/30)</td>
+                            <td>12:00 - 18:00</td>
+                            <td>試營運開放入場</td>
+                        </tr>
+                        <tr>
+                            <td><strong>正式展期</strong> (10/1 - 10/4)</td>
+                            <td>18:00 - 21:00</td>
+                            <td>常設展覽開放、現場導覽</td>
+                        </tr>
+                        <tr>
+                            <td><strong>撤展期</strong> (10/4 - 10/5)</td>
+                            <td>詳見上方說明</td>
+                            <td>撤展與場地清理恢復</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>`;
+
+            container.innerHTML = html;
         }
 
+        /* 渲染人員須知 (含扭蛋與調飲規則更新) */
         function renderRules(type) {
             const container = document.getElementById('rules-card-content');
             let html = '';
             if (currentUser && currentUser.role === 'curator') {
-                html += `<h4 style="color:var(--primary-color);">快閃活動須知 (9/21-24)</h4><ul style="font-size:14px; line-height:1.6;"><li><strong>調飲比例：</strong> (待填寫)</li><li><strong>扭蛋規則：</strong> (待填寫)</li></ul><hr style="border: 0; border-top: 1px dashed #ccc; margin: 15px 0;">`;
+                html += `
+                <h4 style="color:var(--primary-color);">快閃活動須知 (9/21-24)</h4>
+                <div style="font-size:14px; line-height:1.7;">
+                    <strong style="color:var(--sch-red); display:block; margin-top:5px;">扭蛋規則：</strong>
+                    <ul style="margin: 5px 0 10px 0; padding-left:20px;">
+                        <li>追蹤《浮光夏夢》帳號</li>
+                        <li>轉發貼文一則</li>
+                        <li>限制🚫：一人限一次</li>
+                    </ul>
+                    <strong style="color:var(--sch-red); display:block; margin-top:5px;">調飲規則：</strong>
+                    <ul style="margin: 5px 0 10px 0; padding-left:20px;">
+                        <li>發ig tag 《浮光夏夢》</li>
+                        <li>限制🚫：一天一次</li>
+                    </ul>
+                </div>
+                <hr style="border: 0; border-top: 1px dashed #ccc; margin: 15px 0;">`;
             }
             html += `<h4 style="color:var(--primary-color);">正式展場須知 (9/30-10/4)</h4><ul style="font-size:14px; line-height:1.6;"><li><strong>值班規定：</strong> (待填寫)</li></ul>`;
             container.innerHTML = html;
@@ -498,26 +560,42 @@
             });
         }
 
+        /* 送出結帳按鈕 (彈出密碼確認視窗) */
         function submitMerch(e) {
             e.preventDefault();
-            const time = new Date();
-            const timeString = time.getHours() + ':' + String(time.getMinutes()).padStart(2, '0');
-            alert(`✅ 結帳成功！紀錄時間：${timeString}\n(未來此資料將自動傳送至後台)`);
-            document.getElementById('merch-buyer').value = ''; 
+            const pwdInput = prompt('請輸入您的個人密碼以確認送出結帳：');
+            
+            if (pwdInput === null) return; // 使用者按下取消
+            
+            if (pwdInput === getUserPassword(currentUser.id)) {
+                const time = new Date();
+                const timeString = time.getHours() + ':' + String(time.getMinutes()).padStart(2, '0');
+                alert(`✅ 結帳成功！紀錄時間：${timeString}\n(資料已成功登記)`);
+                document.getElementById('merch-buyer').value = ''; 
+            } else {
+                alert('❌ 密碼錯誤，無法送出結帳紀錄！');
+            }
         }
 
         function openProfileModal() { document.getElementById('modal-profile').style.display = 'flex'; }
         function closeProfileModal() { document.getElementById('modal-profile').style.display = 'none'; }
         
+        /* 儲存個人設定 (寫入 LocalStorage 避免重新整理被重置) */
         function saveProfile() {
-            const pwd = document.getElementById('setting-pwd').value;
+            const pwd = document.getElementById('setting-pwd').value.trim();
             const artId = document.getElementById('setting-art-id').value;
-            const link = document.getElementById('setting-art-link').value;
+            const link = document.getElementById('setting-art-link').value.trim();
             
-            if(pwd) staffData[currentUser.id].newPwd = pwd;
-            if(artId && link) customLinks[artId] = link; 
+            if(pwd) {
+                localStorage.setItem('user_pwd_' + currentUser.id, pwd);
+                staffData[currentUser.id].newPwd = pwd;
+            }
+            if(artId && link) {
+                customLinks[artId] = link;
+                localStorage.setItem('reverie_custom_links', JSON.stringify(customLinks));
+            }
             
-            alert('個人設定已暫存更新！');
+            alert('個人設定已永久儲存更新！重新整理網頁也會保留。');
             closeProfileModal();
         }
 
@@ -530,7 +608,7 @@
             lastScrollY = window.scrollY;
         });
 
-        // 快速排班邏輯 (無上限，最少 5 個)
+        // 快速排班邏輯
         let selectedShifts = [];
         document.querySelectorAll('.popup-shift').forEach(btn => {
             btn.addEventListener('click', (e) => {
