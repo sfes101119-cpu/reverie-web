@@ -78,14 +78,14 @@
         .general-input, select, button.submit-btn { width: 100%; padding: 12px; margin-top: 8px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; }
         .submit-btn { background: var(--primary-color); color: white; font-weight: bold; border: none; cursor: pointer; }
         
-        /* 展場圖樣式 */
+        /* 展場圖樣式 (更新座標以符合平面圖) */
         .map-container { position: relative; width: 100%; padding-top: 130%; background-color: #f4f6f8; border-radius: 10px; margin-bottom: 20px; overflow: hidden; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
         .wall { position: absolute; background-color: var(--wall-color); border-radius: 3px; }
-        .wall-left { top: 0; left: 20%; width: 4%; height: 50%; }
-        .wall-u-top { top: 25%; left: 45%; width: 35%; height: 4%; }
-        .wall-u-right { top: 25%; left: 76%; width: 4%; height: 32%; }
-        .wall-u-bottom { top: 53%; left: 45%; width: 35%; height: 4%; }
-        .wall-3-bottom { top: 78%; left: 70%; width: 25%; height: 3%; } /* 編號 3 下方的牆壁橫線 */
+        .wall-left { top: 0; left: 30%; width: 4%; height: 42%; }
+        .wall-u-top { top: 18%; left: 48%; width: 24%; height: 4%; }
+        .wall-u-right { top: 18%; left: 72%; width: 4%; height: 26%; }
+        .wall-u-bottom { top: 44%; left: 48%; width: 24%; height: 4%; }
+        .wall-3-bottom { top: 72%; left: 60%; width: 20%; height: 4%; background-color: #ffcc80; } /* 3號下方牆壁改黃色示意 */
 
         .map-entrance { position: absolute; top: 75%; left: 45%; font-size: 13px; font-weight: bold; color: #555; text-align: center; }
         .map-stairs { position: absolute; top: 62%; left: 16%; width: 12%; height: 25%; background: repeating-linear-gradient(to bottom, #dcdcdc, #dcdcdc 3px, #f4f6f8 3px, #f4f6f8 10px); border: 2px solid #aaa; border-bottom: none; }
@@ -102,11 +102,23 @@
         .shift-btn { background-color: var(--sch-dim); color: white; border: none; border-radius: 8px; height: 40px; display: block; width: 100%; font-size: 11px; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .shift-btn.selected { background-color: var(--sch-red); box-shadow: 0 2px 5px rgba(169, 27, 32, 0.4); transform: scale(0.98); }
 
-        /* 展覽時程表格樣式 */
+        /* 展覽時程表格樣式 (修改首列為主題粉色與白字) */
         .custom-schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
         .custom-schedule-table th, .custom-schedule-table td { border: 1px solid #f0f0f0; padding: 10px 8px; text-align: left; }
-        .custom-schedule-table th { background-color: #fff3f5; color: var(--sch-red); font-weight: bold; }
+        .custom-schedule-table th { background-color: var(--primary-color); color: white; font-weight: bold; }
         .custom-schedule-table tr:nth-child(even) { background-color: #fafafa; }
+
+        /* 新增：臥坐甘特圖表 CSS */
+        .gantt-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 12px; min-width: 850px; }
+        .gantt-table th, .gantt-table td { border: 1px solid #ddd; padding: 5px; height: 35px; }
+        .gantt-table th { background-color: var(--primary-color); color: white; white-space: nowrap; font-weight: bold; position: sticky; top: 0; }
+        .gantt-time { background-color: #f9f9f9; font-weight: bold; color: #555; white-space: nowrap; }
+        .bg-flash { background-color: #fff2cc; font-weight: bold; color: #333; }
+        .bg-setup { background-color: #eeeeee; font-weight: bold; color: #333; }
+        .bg-prep { background-color: #f5f5f5; color: #333; }
+        .bg-tea { background-color: #fff2cc; color: #333; }
+        .bg-exhibit { background-color: #bbdefb; font-weight: bold; color: #333; }
+        .bg-teardown { background-color: #eeeeee; font-weight: bold; color: #333; }
 
         /* 周邊網格 */
         .merch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
@@ -173,32 +185,33 @@
                         <div class="map-stairs"></div>
                         <div class="map-entrance">⬆ 入口</div>
                         
-                        <button class="artwork-btn" style="top: 6%; left: 80%;" onclick="showArtworkInfo(1, event)">1</button>
-                        <button class="artwork-btn" style="top: 32%; left: 55%;" onclick="showArtworkInfo(2, event)">2</button>
-                        <button class="artwork-btn" style="top: 72%; left: 80%;" onclick="showArtworkInfo(3, event)">3</button>
-                        <button class="artwork-btn" style="top: 48%; left: 25%;" onclick="showArtworkInfo(4, event)">4</button>
-                        <button class="artwork-btn" style="top: 68%; left: 92%;" onclick="showArtworkInfo(5, event)">5</button>
-                        <button class="artwork-btn" style="top: 40%; left: 92%;" onclick="showArtworkInfo(6, event)">6</button>
-                        <button class="artwork-btn" style="top: 54%; left: 92%;" onclick="showArtworkInfo(7, event)">7</button>
-                        <button class="artwork-btn" style="top: 22%; left: 92%;" onclick="showArtworkInfo(8, event)">8</button>
-                        <button class="artwork-btn" style="top: 32%; left: 82%;" onclick="showArtworkInfo(9, event)">9</button>
-                        <button class="artwork-btn" style="top: 6%; left: 92%;" onclick="showArtworkInfo(10, event)">10</button>
-                        <button class="artwork-btn" style="top: 6%; left: 70%;" onclick="showArtworkInfo(11, event)">11</button>
-                        <button class="artwork-btn" style="top: 38%; left: 70%;" onclick="showArtworkInfo(12, event)">12</button>
-                        <button class="artwork-btn" style="top: 52%; left: 48%;" onclick="showArtworkInfo(13, event)">13</button>
-                        <button class="artwork-btn" style="top: 18%; left: 80%;" onclick="showArtworkInfo(14, event)">14</button>
-                        <button class="artwork-btn" style="top: 52%; left: 70%;" onclick="showArtworkInfo(15, event)">15</button>
-                        <button class="artwork-btn" style="top: 15%; left: 35%;" onclick="showArtworkInfo(16, event)">16</button>
-                        <button class="artwork-btn" style="top: 6%; left: 15%;" onclick="showArtworkInfo(17, event)">17</button>
-                        <button class="artwork-btn" style="top: 6%; left: 52%;" onclick="showArtworkInfo(18, event)">18</button>
-                        <button class="artwork-btn" style="top: 6%; left: 35%;" onclick="showArtworkInfo(19, event)">19</button>
-                        <button class="artwork-btn" style="top: 40%; left: 58%;" onclick="showArtworkInfo(20, event)">20</button>
-                        <button class="artwork-btn" style="top: 52%; left: 58%;" onclick="showArtworkInfo(21, event)">21</button>
-                        <button class="artwork-btn" style="top: 20%; left: 82%;" onclick="showArtworkInfo(22, event)">22</button>
-                        <button class="artwork-btn" style="top: 6%; left: 60%;" onclick="showArtworkInfo(23, event)">23</button>
-                        <button class="artwork-btn" style="top: 46%; left: 82%;" onclick="showArtworkInfo(24, event)">24</button>
-                        <button class="artwork-btn" style="top: 28%; left: 25%;" onclick="showArtworkInfo(25, event)">25</button>
-                        <button class="artwork-btn" style="top: 60%; left: 82%;" onclick="showArtworkInfo(26, event)">26</button>
+                        <!-- 座標已對照 image_15b284.jpg 重新規劃 -->
+                        <button class="artwork-btn" style="top: 2%; left: 75%;" onclick="showArtworkInfo(1, event)">1</button>
+                        <button class="artwork-btn" style="top: 20%; left: 55%;" onclick="showArtworkInfo(2, event)">2</button>
+                        <button class="artwork-btn" style="top: 74%; left: 70%;" onclick="showArtworkInfo(3, event)">3</button>
+                        <button class="artwork-btn" style="top: 35%; left: 32%;" onclick="showArtworkInfo(4, event)">4</button>
+                        <button class="artwork-btn" style="top: 61%; left: 96%;" onclick="showArtworkInfo(5, event)">5</button>
+                        <button class="artwork-btn" style="top: 30%; left: 96%;" onclick="showArtworkInfo(6, event)">6</button>
+                        <button class="artwork-btn" style="top: 50%; left: 96%;" onclick="showArtworkInfo(7, event)">7</button>
+                        <button class="artwork-btn" style="top: 17%; left: 96%;" onclick="showArtworkInfo(8, event)">8</button>
+                        <button class="artwork-btn" style="top: 25%; left: 74%;" onclick="showArtworkInfo(9, event)">9</button>
+                        <button class="artwork-btn" style="top: 2%; left: 96%;" onclick="showArtworkInfo(10, event)">10</button>
+                        <button class="artwork-btn" style="top: 2%; left: 86%;" onclick="showArtworkInfo(11, event)">11</button>
+                        <button class="artwork-btn" style="top: 36%; left: 74%;" onclick="showArtworkInfo(12, event)">12</button>
+                        <button class="artwork-btn" style="top: 46%; left: 50%;" onclick="showArtworkInfo(13, event)">13</button>
+                        <button class="artwork-btn" style="top: 20%; left: 70%;" onclick="showArtworkInfo(14, event)">14</button>
+                        <button class="artwork-btn" style="top: 46%; left: 70%;" onclick="showArtworkInfo(15, event)">15</button>
+                        <button class="artwork-btn" style="top: 10%; left: 42%;" onclick="showArtworkInfo(16, event)">16</button>
+                        <button class="artwork-btn" style="top: 2%; left: 35%;" onclick="showArtworkInfo(17, event)">17</button>
+                        <button class="artwork-btn" style="top: 2%; left: 55%;" onclick="showArtworkInfo(18, event)">18</button>
+                        <button class="artwork-btn" style="top: 2%; left: 45%;" onclick="showArtworkInfo(19, event)">19</button>
+                        <button class="artwork-btn" style="top: 30%; left: 60%;" onclick="showArtworkInfo(20, event)">20</button>
+                        <button class="artwork-btn" style="top: 46%; left: 60%;" onclick="showArtworkInfo(21, event)">21</button>
+                        <button class="artwork-btn" style="top: 15%; left: 85%;" onclick="showArtworkInfo(22, event)">22</button>
+                        <button class="artwork-btn" style="top: 2%; left: 65%;" onclick="showArtworkInfo(23, event)">23</button>
+                        <button class="artwork-btn" style="top: 40%; left: 96%;" onclick="showArtworkInfo(24, event)">24</button>
+                        <button class="artwork-btn" style="top: 18%; left: 32%;" onclick="showArtworkInfo(25, event)">25</button>
+                        <button class="artwork-btn" style="top: 38%; left: 82%;" onclick="showArtworkInfo(26, event)">26</button>
                     </div>
 
                     <div id="artwork-info-panel" style="display: none; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
@@ -316,13 +329,11 @@
     </div>
 
     <script>
-        // 👇 就是這行！請把你在步驟二取得的 Google Apps Script 網址貼在單引號裡面 👇
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYM4yRxNwEKZ6tWz5DDXw6QDOg7KX-nzyQOo4oTGRlvIiusP2il9lBJt7FvKvfU6tZ/exec'; 
 
         let currentUser = null;
         let customLinks = JSON.parse(localStorage.getItem('reverie_custom_links') || '{}'); 
 
-        // 更新後的身分組名單 (已自動過濾並設定權限)
         const staffData = {
             "11210831": { name: "林珈年", group: "公關組", role: "curator" },
             "11310836": { name: "高顥禎", group: "作品人", role: "creator" },
@@ -408,7 +419,6 @@
         function goToLogin() { document.getElementById('page-landing').classList.remove('active'); document.getElementById('page-login').classList.add('active'); }
         function goBackLanding() { document.getElementById('page-login').classList.remove('active'); document.getElementById('page-landing').classList.add('active'); document.getElementById('login-id').value = ''; document.getElementById('login-pwd').value = ''; }
         
-        /* 取得目前的儲存密碼 (支援 LocalStorage 記憶機制) */
         function getUserPassword(id) {
             const savedPwd = localStorage.getItem('user_pwd_' + id);
             if (savedPwd) return savedPwd;
@@ -469,7 +479,7 @@
             }
         }
 
-        /* 渲染時程表與新增表格 */
+        /* 渲染時程表與甘特圖表格 */
         function renderSchedule(type) {
             const container = document.getElementById('schedule-card-content');
             let html = `<h4 style="color:var(--primary-color); font-size:16px; margin-top:0;">詳細時程表</h4><div class="weekly-planner">`;
@@ -480,8 +490,10 @@
             }
             
             html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">9/30 (三)</div><div style="font-size:14px; color:#555;">🖼️ 展期首日 (12:00-18:00)</div></div>`;
-            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">10/1 (四) - 10/4 (日)</div><div style="font-size:14px; color:#555;">🖼️ 正式展期 (18:00-21:00)</div></div>`;
-            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">開幕茶會</div><div style="font-size:14px; color:#555;">✨ 確切時程待公布</div></div>`;
+            
+            // 更新：茶會時間與展期時間
+            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">開幕茶會 (9/30)</div><div style="font-size:14px; color:#555;">✨ 12:00-12:20 開放入場<br>✨ 12:20-13:00 活動開始</div></div>`;
+            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">10/1 (四) - 10/4 (日)</div><div style="font-size:14px; color:#555;">🖼️ 正式展期 (09:00-18:00)</div></div>`;
             
             if(type === 'staff') {
                 html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">10/4 (日) 18:00-21:00</div><div style="font-size:14px; color:#555;">📦 撤展 (作品想先拿可先拿走)</div></div>`;
@@ -490,7 +502,7 @@
             
             html += `</div>`;
 
-            /* 新增區塊：展覽每日時間表 */
+            /* 區塊 1：文字列表總覽表 */
             html += `
             <div style="margin-top:25px; border-top: 1px dashed #ddd; padding-top:15px;">
                 <h4 style="color:var(--primary-color); font-size:16px; margin-top:0;">展覽活動每日流程總覽表</h4>
@@ -516,11 +528,11 @@
                         <tr>
                             <td><strong>首日開放</strong> (9/30)</td>
                             <td>12:00 - 18:00</td>
-                            <td>試營運開放入場</td>
+                            <td>試營運開放入場 (含開幕茶會)</td>
                         </tr>
                         <tr>
                             <td><strong>正式展期</strong> (10/1 - 10/4)</td>
-                            <td>18:00 - 21:00</td>
+                            <td>09:00 - 18:00</td>
                             <td>常設展覽開放、現場導覽</td>
                         </tr>
                         <tr>
@@ -532,10 +544,87 @@
                 </table>
             </div>`;
 
+            /* 區塊 2：臥坐甘特圖表 (可滑動) */
+            html += `
+            <div style="margin-top:25px; border-top: 1px dashed #ddd; padding-top:15px; overflow-x: auto;">
+                <h4 style="color:var(--primary-color); font-size:16px; margin-top:0;">臥坐時程圖表</h4>
+                <table class="gantt-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">時間</th>
+                            <th>9/21<br>週一</th>
+                            <th>9/22<br>週二</th>
+                            <th>9/23<br>週三</th>
+                            <th>9/24<br>週四</th>
+                            <th>9/28<br>週一</th>
+                            <th>9/29<br>週二</th>
+                            <th>9/30<br>週三</th>
+                            <th>10/1<br>週四</th>
+                            <th>10/2<br>週五</th>
+                            <th>10/3<br>週六</th>
+                            <th>10/4<br>週日</th>
+                            <th>10/5<br>週一</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="gantt-time">8:00-9:00</td>
+                            <td></td><td></td><td></td><td></td> <td></td> <td></td> <td></td> <td></td><td></td><td></td><td></td>
+                            <td rowspan="4" class="bg-teardown">撤展</td>
+                        </tr>
+                        <tr>
+                            <td class="gantt-time">9:00-10:00</td>
+                            <td></td><td></td><td></td><td></td> <td></td> <td></td> <td></td>
+                            <td colspan="4" rowspan="9" class="bg-exhibit">展期</td>
+                        </tr>
+                        <tr>
+                            <td class="gantt-time">10:00-11:00</td>
+                            <td colspan="4" rowspan="8" class="bg-flash">快閃活動</td>
+                            <td></td>
+                            <td rowspan="8" class="bg-setup">場佈</td>
+                            <td rowspan="2" class="bg-prep">準備</td>
+                        </tr>
+                        <tr>
+                            <td class="gantt-time">11:00-12:00</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="gantt-time">12:00-13:00</td>
+                            <td></td>
+                            <td class="bg-tea">茶會</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="gantt-time">13:00-14:00</td>
+                            <td></td>
+                            <td rowspan="5" class="bg-exhibit">展期</td>
+                            <td></td>
+                        </tr>
+                        <tr><td class="gantt-time">14:00-15:00</td> <td></td> <td></td></tr>
+                        <tr><td class="gantt-time">15:00-16:00</td> <td></td> <td></td></tr>
+                        <tr><td class="gantt-time">16:00-17:00</td> <td></td> <td></td></tr>
+                        <tr><td class="gantt-time">17:00-18:00</td> <td></td> <td></td></tr>
+                        <tr>
+                            <td class="gantt-time">18:00-19:00</td>
+                            <td></td><td></td><td></td><td></td> <td></td> <td></td> <td></td> <td></td><td></td><td></td>
+                            <td rowspan="3" class="bg-teardown">撤作品</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="gantt-time">19:00-20:00</td>
+                            <td></td><td></td><td></td><td></td> <td></td> <td></td> <td></td> <td></td><td></td><td></td> <td></td>
+                        </tr>
+                        <tr>
+                            <td class="gantt-time">20:00-21:00</td>
+                            <td></td><td></td><td></td><td></td> <td></td> <td></td> <td></td> <td></td><td></td><td></td> <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>`;
+
             container.innerHTML = html;
         }
 
-        /* 渲染人員須知 (含扭蛋與調飲規則更新) */
         function renderRules(type) {
             const container = document.getElementById('rules-card-content');
             let html = '';
@@ -570,7 +659,6 @@
             });
         }
 
-        /* 送出結帳按鈕 (彈出密碼確認視窗) */
         function submitMerch(e) {
             e.preventDefault();
             const pwdInput = prompt('請輸入您的個人密碼以確認送出結帳：');
@@ -590,7 +678,6 @@
         function openProfileModal() { document.getElementById('modal-profile').style.display = 'flex'; }
         function closeProfileModal() { document.getElementById('modal-profile').style.display = 'none'; }
         
-        /* 儲存個人設定 (寫入 LocalStorage 避免重新整理被重置) */
         function saveProfile() {
             const pwd = document.getElementById('setting-pwd').value.trim();
             const artId = document.getElementById('setting-art-id').value;
@@ -609,7 +696,6 @@
             closeProfileModal();
         }
 
-        // 導覽列隱藏邏輯
         let lastScrollY = window.scrollY;
         window.addEventListener('scroll', () => {
             const header = document.getElementById('main-header');
@@ -618,7 +704,6 @@
             lastScrollY = window.scrollY;
         });
 
-        // 快速排班邏輯
         let selectedShifts = [];
         document.querySelectorAll('.popup-shift').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -642,7 +727,6 @@
             });
         });
         
-        // 替換原本的 submitShift 函數為串接 API 的版本
         function submitShift(e, type) {
             e.preventDefault();
             if(selectedShifts.length < 5) return alert('排班資料不完整：請至少選擇 5 個空堂時段喔！');
