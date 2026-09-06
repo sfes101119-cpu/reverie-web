@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+    </script<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -78,15 +79,15 @@
         .general-input, select, button.submit-btn { width: 100%; padding: 12px; margin-top: 8px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; }
         .submit-btn { background: var(--primary-color); color: white; font-weight: bold; border: none; cursor: pointer; }
         
-        /* 展場圖樣式 (更新座標以符合平面圖) */
+        /* 展場圖樣式 */
         .map-container { position: relative; width: 100%; padding-top: 130%; background-color: #f4f6f8; border-radius: 10px; margin-bottom: 20px; overflow: hidden; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
         .wall { position: absolute; background-color: var(--wall-color); border-radius: 3px; }
-        .wall-left { top: 0; left: 30%; width: 4%; height: 42%; }
-        .wall-u-top { top: 18%; left: 48%; width: 24%; height: 4%; }
-        .wall-u-right { top: 18%; left: 72%; width: 4%; height: 26%; }
-        .wall-u-bottom { top: 44%; left: 48%; width: 24%; height: 4%; }
-        .wall-3-bottom { top: 72%; left: 60%; width: 20%; height: 4%; background-color: #ffcc80; } /* 3號下方牆壁改黃色示意 */
-
+        .wall-left { top: 0; left: 20%; width: 4%; height: 50%; }
+        .wall-u-top { top: 25%; left: 45%; width: 35%; height: 4%; }
+        .wall-u-right { top: 25%; left: 76%; width: 4%; height: 32%; }
+        .wall-u-bottom { top: 53%; left: 45%; width: 35%; height: 4%; }
+        .wall-3-bottom { top: 78%; left: 70%; width: 25%; height: 3%; } 
+        
         .map-entrance { position: absolute; top: 75%; left: 45%; font-size: 13px; font-weight: bold; color: #555; text-align: center; }
         .map-stairs { position: absolute; top: 62%; left: 16%; width: 12%; height: 25%; background: repeating-linear-gradient(to bottom, #dcdcdc, #dcdcdc 3px, #f4f6f8 3px, #f4f6f8 10px); border: 2px solid #aaa; border-bottom: none; }
         .artwork-btn { position: absolute; width: 26px; height: 26px; background-color: #fff; color: var(--text-color); border: 2px solid var(--primary-color); border-radius: 50%; font-size: 11px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: 0.2s; transform: translate(-50%, -50%); display: flex; justify-content: center; align-items: center; padding: 0; z-index: 5; }
@@ -102,13 +103,13 @@
         .shift-btn { background-color: var(--sch-dim); color: white; border: none; border-radius: 8px; height: 40px; display: block; width: 100%; font-size: 11px; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .shift-btn.selected { background-color: var(--sch-red); box-shadow: 0 2px 5px rgba(169, 27, 32, 0.4); transform: scale(0.98); }
 
-        /* 展覽時程表格樣式 (修改首列為主題粉色與白字) */
+        /* 展覽時程表格樣式 */
         .custom-schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
         .custom-schedule-table th, .custom-schedule-table td { border: 1px solid #f0f0f0; padding: 10px 8px; text-align: left; }
         .custom-schedule-table th { background-color: var(--primary-color); color: white; font-weight: bold; }
         .custom-schedule-table tr:nth-child(even) { background-color: #fafafa; }
 
-        /* 新增：臥坐甘特圖表 CSS */
+        /* 臥坐甘特圖表 CSS */
         .gantt-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 12px; min-width: 850px; }
         .gantt-table th, .gantt-table td { border: 1px solid #ddd; padding: 5px; height: 35px; }
         .gantt-table th { background-color: var(--primary-color); color: white; white-space: nowrap; font-weight: bold; position: sticky; top: 0; }
@@ -185,33 +186,32 @@
                         <div class="map-stairs"></div>
                         <div class="map-entrance">⬆ 入口</div>
                         
-                        <!-- 座標已對照 image_15b284.jpg 重新規劃 -->
-                        <button class="artwork-btn" style="top: 2%; left: 75%;" onclick="showArtworkInfo(1, event)">1</button>
-                        <button class="artwork-btn" style="top: 20%; left: 55%;" onclick="showArtworkInfo(2, event)">2</button>
-                        <button class="artwork-btn" style="top: 74%; left: 70%;" onclick="showArtworkInfo(3, event)">3</button>
-                        <button class="artwork-btn" style="top: 35%; left: 32%;" onclick="showArtworkInfo(4, event)">4</button>
-                        <button class="artwork-btn" style="top: 61%; left: 96%;" onclick="showArtworkInfo(5, event)">5</button>
-                        <button class="artwork-btn" style="top: 30%; left: 96%;" onclick="showArtworkInfo(6, event)">6</button>
-                        <button class="artwork-btn" style="top: 50%; left: 96%;" onclick="showArtworkInfo(7, event)">7</button>
-                        <button class="artwork-btn" style="top: 17%; left: 96%;" onclick="showArtworkInfo(8, event)">8</button>
-                        <button class="artwork-btn" style="top: 25%; left: 74%;" onclick="showArtworkInfo(9, event)">9</button>
-                        <button class="artwork-btn" style="top: 2%; left: 96%;" onclick="showArtworkInfo(10, event)">10</button>
-                        <button class="artwork-btn" style="top: 2%; left: 86%;" onclick="showArtworkInfo(11, event)">11</button>
-                        <button class="artwork-btn" style="top: 36%; left: 74%;" onclick="showArtworkInfo(12, event)">12</button>
-                        <button class="artwork-btn" style="top: 46%; left: 50%;" onclick="showArtworkInfo(13, event)">13</button>
-                        <button class="artwork-btn" style="top: 20%; left: 70%;" onclick="showArtworkInfo(14, event)">14</button>
-                        <button class="artwork-btn" style="top: 46%; left: 70%;" onclick="showArtworkInfo(15, event)">15</button>
-                        <button class="artwork-btn" style="top: 10%; left: 42%;" onclick="showArtworkInfo(16, event)">16</button>
-                        <button class="artwork-btn" style="top: 2%; left: 35%;" onclick="showArtworkInfo(17, event)">17</button>
-                        <button class="artwork-btn" style="top: 2%; left: 55%;" onclick="showArtworkInfo(18, event)">18</button>
-                        <button class="artwork-btn" style="top: 2%; left: 45%;" onclick="showArtworkInfo(19, event)">19</button>
-                        <button class="artwork-btn" style="top: 30%; left: 60%;" onclick="showArtworkInfo(20, event)">20</button>
-                        <button class="artwork-btn" style="top: 46%; left: 60%;" onclick="showArtworkInfo(21, event)">21</button>
-                        <button class="artwork-btn" style="top: 15%; left: 85%;" onclick="showArtworkInfo(22, event)">22</button>
-                        <button class="artwork-btn" style="top: 2%; left: 65%;" onclick="showArtworkInfo(23, event)">23</button>
-                        <button class="artwork-btn" style="top: 40%; left: 96%;" onclick="showArtworkInfo(24, event)">24</button>
-                        <button class="artwork-btn" style="top: 18%; left: 32%;" onclick="showArtworkInfo(25, event)">25</button>
-                        <button class="artwork-btn" style="top: 38%; left: 82%;" onclick="showArtworkInfo(26, event)">26</button>
+                        <button class="artwork-btn" style="top: 10%; left: 78%;" onclick="showArtworkInfo(1, event)">1</button>
+                        <button class="artwork-btn" style="top: 35%; left: 52%;" onclick="showArtworkInfo(2, event)">2</button>
+                        <button class="artwork-btn" style="top: 73%; left: 82%;" onclick="showArtworkInfo(3, event)">3</button>
+                        <button class="artwork-btn" style="top: 40%; left: 12%;" onclick="showArtworkInfo(4, event)">4</button>
+                        <button class="artwork-btn" style="top: 68%; left: 95%;" onclick="showArtworkInfo(5, event)">5</button>
+                        <button class="artwork-btn" style="top: 35%; left: 95%;" onclick="showArtworkInfo(6, event)">6</button>
+                        <button class="artwork-btn" style="top: 56%; left: 95%;" onclick="showArtworkInfo(7, event)">7</button>
+                        <button class="artwork-btn" style="top: 22%; left: 95%;" onclick="showArtworkInfo(8, event)">8</button>
+                        <button class="artwork-btn" style="top: 35%; left: 86%;" onclick="showArtworkInfo(9, event)">9</button>
+                        <button class="artwork-btn" style="top: 10%; left: 95%;" onclick="showArtworkInfo(10, event)">10</button>
+                        <button class="artwork-btn" style="top: 10%; left: 88%;" onclick="showArtworkInfo(11, event)">11</button>
+                        <button class="artwork-btn" style="top: 42%; left: 71%;" onclick="showArtworkInfo(12, event)">12</button>
+                        <button class="artwork-btn" style="top: 48%; left: 52%;" onclick="showArtworkInfo(13, event)">13</button>
+                        <button class="artwork-btn" style="top: 35%; left: 71%;" onclick="showArtworkInfo(14, event)">14</button>
+                        <button class="artwork-btn" style="top: 48%; left: 71%;" onclick="showArtworkInfo(15, event)">15</button>
+                        <button class="artwork-btn" style="top: 18%; left: 34%;" onclick="showArtworkInfo(16, event)">16</button>
+                        <button class="artwork-btn" style="top: 10%; left: 12%;" onclick="showArtworkInfo(17, event)">17</button>
+                        <button class="artwork-btn" style="top: 10%; left: 58%;" onclick="showArtworkInfo(18, event)">18</button>
+                        <button class="artwork-btn" style="top: 10%; left: 48%;" onclick="showArtworkInfo(19, event)">19</button>
+                        <button class="artwork-btn" style="top: 41%; left: 61%;" onclick="showArtworkInfo(20, event)">20</button>
+                        <button class="artwork-btn" style="top: 48%; left: 61%;" onclick="showArtworkInfo(21, event)">21</button>
+                        <button class="artwork-btn" style="top: 20%; left: 88%;" onclick="showArtworkInfo(22, event)">22</button>
+                        <button class="artwork-btn" style="top: 10%; left: 68%;" onclick="showArtworkInfo(23, event)">23</button>
+                        <button class="artwork-btn" style="top: 46%; left: 95%;" onclick="showArtworkInfo(24, event)">24</button>
+                        <button class="artwork-btn" style="top: 25%; left: 12%;" onclick="showArtworkInfo(25, event)">25</button>
+                        <button class="artwork-btn" style="top: 48%; left: 86%;" onclick="showArtworkInfo(26, event)">26</button>
                     </div>
 
                     <div id="artwork-info-panel" style="display: none; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
@@ -479,7 +479,7 @@
             }
         }
 
-        /* 渲染時程表與甘特圖表格 */
+        /* 渲染時程表與新增表格 */
         function renderSchedule(type) {
             const container = document.getElementById('schedule-card-content');
             let html = `<h4 style="color:var(--primary-color); font-size:16px; margin-top:0;">詳細時程表</h4><div class="weekly-planner">`;
@@ -490,10 +490,8 @@
             }
             
             html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">9/30 (三)</div><div style="font-size:14px; color:#555;">🖼️ 展期首日 (12:00-18:00)</div></div>`;
-            
-            // 更新：茶會時間與展期時間
-            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">茶會 9/30(三)</div><div style="font-size:14px; color:#555;">✨ 12:00-12:20 開放入場<br>✨ 12:20-13:00 活動開始</div></div>`;
-            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">展期10/1 (四) - 10/4 (日)</div><div style="font-size:14px; color:#555;">🖼️ 09:00-18:00 正式展期</div></div>`;
+            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">開幕茶會 (9/30)</div><div style="font-size:14px; color:#555;">✨ 12:00-12:20 開放入場<br>✨ 12:20-13:00 活動開始</div></div>`;
+            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">10/1 (四) - 10/4 (日)</div><div style="font-size:14px; color:#555;">🖼️ 正式展期 (09:00-18:00)</div></div>`;
             
             if(type === 'staff') {
                 html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">10/4 (日) 18:00-21:00</div><div style="font-size:14px; color:#555;">📦 撤展 (作品想先拿可先拿走)</div></div>`;
@@ -502,7 +500,7 @@
             
             html += `</div>`;
 
-            /* 區塊 1：文字列表總覽表 */
+            /* 新增區塊：展覽每日時間表 */
             html += `
             <div style="margin-top:25px; border-top: 1px dashed #ddd; padding-top:15px;">
                 <h4 style="color:var(--primary-color); font-size:16px; margin-top:0;">展覽活動每日流程總覽表</h4>
@@ -625,6 +623,7 @@
             container.innerHTML = html;
         }
 
+        /* 渲染人員須知 */
         function renderRules(type) {
             const container = document.getElementById('rules-card-content');
             let html = '';
