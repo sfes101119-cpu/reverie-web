@@ -485,17 +485,17 @@
             let html = `<h4 style="color:var(--primary-color); font-size:16px; margin-top:0;">詳細時程表</h4><div class="weekly-planner">`;
             
             if(type === 'staff') {
-                html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">9/21 (一) - 9/24 (四)</div><div style="font-size:14px; color:#555;">🎪 快閃活動 (10:00-18:00)</div></div>`;
-                html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">9/29 (二)</div><div style="font-size:14px; color:#555;">🔧 12:00 開始場佈 (21:00前須結束)</div></div>`;
+                html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">9/21 (一) - 9/24 (四)</div><div style="font-size:14px; color:#555;">🎪10:00-18:00 快閃活動</div></div>`;
+                html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">9/29 (二)</div><div style="font-size:14px; color:#555;">🔧12:00 開始場佈 (21:00前須結束)</div></div>`;
             }
             
-            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">9/30 (三)</div><div style="font-size:14px; color:#555;">🖼️ 展期首日 (12:00-18:00)</div></div>`;
+            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">9/30 (三)</div><div style="font-size:14px; color:#555;">🖼️ 12:00-18:00 展期首日 </div></div>`;
             html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">開幕茶會 (9/30)</div><div style="font-size:14px; color:#555;">✨ 12:00-12:20 開放入場<br>✨ 12:20-13:00 活動開始</div></div>`;
-            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">10/1 (四) - 10/4 (日)</div><div style="font-size:14px; color:#555;">🖼️ 正式展期 (09:00-18:00)</div></div>`;
+            html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">10/1 (四) - 10/4 (日)</div><div style="font-size:14px; color:#555;">🖼️ 09:00-18:00 正式展期 </div></div>`;
             
             if(type === 'staff') {
-                html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">10/4 (日) 18:00-21:00</div><div style="font-size:14px; color:#555;">📦 撤展 (作品想先拿可先拿走)</div></div>`;
-                html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px;"><div style="font-weight:bold;">10/5 (一) 08:00-12:00</div><div style="font-size:14px; color:#555;">📦 撤展完畢 (10-12有系必修網站規劃)</div></div>`;
+                html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px; margin-bottom:10px;"><div style="font-weight:bold;">10/4 (日) </div><div style="font-size:14px; color:#555;">📦 18:00-21:00 撤展 (作品想先拿可先拿走)</div></div>`;
+                html += `<div class="day-card" style="background:#f9f9f9; padding:15px; border-left:5px solid var(--primary-color); border-radius:8px;"><div style="font-weight:bold;">10/5 (一) </div><div style="font-size:14px; color:#555;">📦 08:00-12:00 撤展完畢 <br> (10-12有系必修網站規劃)</div></div>`;
             }
             
             html += `</div>`;
@@ -545,7 +545,7 @@
             /* 區塊 2：臥坐甘特圖表 (可滑動) */
             html += `
             <div style="margin-top:25px; border-top: 1px dashed #ddd; padding-top:15px; overflow-x: auto;">
-                <h4 style="color:var(--primary-color); font-size:16px; margin-top:0;">臥坐時程圖表</h4>
+                <h4 style="color:var(--primary-color); font-size:16px; margin-top:0;">展覽時程圖表</h4>
                 <table class="gantt-table">
                     <thead>
                         <tr>
