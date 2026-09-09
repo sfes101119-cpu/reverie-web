@@ -296,6 +296,8 @@
                             <option value="" disabled selected>請選擇結帳品項...</option>
                             <option value="徽章">徽章 $40</option>
                             <option value="刀模貼紙">刀模貼紙 $69</option>
+                            <option value="浮光套餐">刀模貼紙 $159</option>
+                            <option value="壓克力鏡面吊飾">壓克力鏡面吊飾 $99</option>
                         </select>
                         <button type="submit" class="submit-btn" style="margin-bottom:0;">送出結帳紀錄</button>
                     </form>
@@ -377,12 +379,15 @@
         };
 
         const merchData = [
-            { name: "徽章", price: 40, desc: "尺寸 4x4cm", stock: 150 },
-            { name: "刀模貼紙", price: 69, desc: "尺寸 12x18cm", stock: 80 },
-            { name: "長方形貼紙", price: 0, desc: "將貼於快閃活動調飲上", stock: "無限" },
-            { name: "衛生紙", price: 0, desc: "快閃/展場現場獲得", stock: 200 },
-            { name: "酷卡", price: 0, desc: "展場現場獲得", stock: 300 },
-            { name: "導覽三折頁", price: 0, desc: "展場現場獲得", stock: 500 }
+            { name: "浮光套餐", price: 159, desc: "鏡面壓克力吊飾+貼紙", stock: 50 },
+            { name: "徽章", price: 40, desc: "尺寸 4x4cm", stock: 50 },
+            { name: "刀模貼紙", price: 69, desc: "尺寸 12x18cm", stock: 50 },
+            { name: "壓克力鏡面吊飾", price: 99, desc: "具備鏡子功能", stock: 50 },
+            { name: "長方形貼紙", price: 0, desc: "將貼於快閃活動調飲上", stock:320 },
+            { name: "衛生紙", price: 0, desc: "快閃/展場現場獲得", stock: 300 },
+            { name: "酷卡", price: 0, desc: "展場現場獲得", stock: 200 },
+            { name: "導覽三折頁", price: 0, desc: "展場現場獲得", stock: 200 }
+            
         ];
 
         // 根據您提供的最新對應資料全面更新 (保留了先前的互動與提醒文字，皆附於理念最後)
@@ -634,7 +639,7 @@
                     <strong style="color:var(--sch-red); display:block; margin-top:5px;">調飲規則：</strong>
                     <ul style="margin: 5px 0 10px 0; padding-left:20px;">
                         <li>發ig tag 《浮光夏夢》</li>
-                        <li>限制🚫：一天一次</li>
+                        <li>限制🚫：一人限一次</li>
                     </ul>
                 </div>
                 <hr style="border: 0; border-top: 1px dashed #ccc; margin: 15px 0;">`;
