@@ -456,20 +456,25 @@
                 document.getElementById('staff-checkout-area').style.display = 'block';
                 
                 if(currentUser.role === 'curator') {
-                    nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-B', event)">快閃排班</button><button class="nav-btn" onclick="switchTab('tab-F', event)">展期排班</button><button class="nav-btn" onclick="switchTab('tab-C', event)">理念/排程</button><button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button><button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button>`;
+                    // 幹部/策展組：1.理念排程 2.人員須知 3.周邊登記 4.快閃排班 5.展場圖 6.展期排班
+                    nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-C', event)">理念/排程</button><button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button><button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button><button class="nav-btn" onclick="switchTab('tab-B', event)">快閃排班</button><button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-F', event)">展期排班</button>`;
                     document.getElementById('shift-name-popup').value = currentUser.name;
                 } else {
-                    nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-F', event)">展期排班</button><button class="nav-btn" onclick="switchTab('tab-C', event)">理念/排程</button><button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button><button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button>`;
+                    // 一般展出人員 (沒有快閃排班)：1.理念排程 2.人員須知 3.周邊登記 4.展場圖 5.展期排班
+                    nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-C', event)">理念/排程</button><button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button><button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button><button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-F', event)">展期排班</button>`;
                 }
                 renderSchedule('staff');
                 renderRules('staff');
                 renderMerch('staff');
             } else {
-                nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-C', event)">展覽時程</button><button class="nav-btn" onclick="switchTab('tab-E', event)">浮光周邊</button>`;
+                // 訪客/看展者：1.展覽時程 2.浮光周邊 3.展場圖
+                nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-C', event)">展覽時程</button><button class="nav-btn" onclick="switchTab('tab-E', event)">浮光周邊</button><button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button>`;
                 document.getElementById('staff-checkout-area').style.display = 'none';
                 renderSchedule('visitor');
                 renderMerch('visitor');
             }
+            
+            // 自動點擊第一個按鈕（現在一登入就會直接顯示「理念排程」畫面囉！）
             nav.firstElementChild.click();
         }
 
