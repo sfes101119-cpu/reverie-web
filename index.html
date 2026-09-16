@@ -92,7 +92,7 @@
         .artwork-btn { position: absolute; width: 26px; height: 26px; background-color: #fff; color: var(--text-color); border: 2px solid var(--primary-color); border-radius: 50%; font-size: 11px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: 0.2s; transform: translate(-50%, -50%); display: flex; justify-content: center; align-items: center; padding: 0; z-index: 5; }
         .artwork-btn:hover, .artwork-btn.active-btn { transform: translate(-50%, -50%) scale(1.2); background-color: var(--primary-color); color: white; z-index: 10; }
 
-        /* 快閃排班 課表樣式 */
+        /* 快閃與顧展 排班表樣式 */
         .schedule-wrapper { overflow-x: auto; background: var(--sch-bg); padding: 15px; border-radius: 15px; margin-top: 10px; margin-bottom: 20px; box-shadow: inset 0 0 8px rgba(0,0,0,0.05); }
         .schedule-grid { display: grid; grid-template-columns: 40px repeat(4, 1fr); gap: 6px; min-width: 320px; }
         .sch-time-col { position: relative; margin-top: 30px; height: 368px; }
@@ -101,6 +101,12 @@
         .sch-header { font-size: 12px; font-weight: bold; text-align: center; color: var(--sch-red); height: 24px; line-height: 1.2; display: flex; flex-direction: column; justify-content: center; }
         .shift-btn { background-color: var(--sch-dim); color: white; border: none; border-radius: 8px; height: 40px; display: block; width: 100%; font-size: 11px; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .shift-btn.selected { background-color: var(--sch-red); box-shadow: 0 2px 5px rgba(169, 27, 32, 0.4); transform: scale(0.98); }
+        
+        /* 確定的班表專用，沒有 hover，沒有 pointer */
+        .confirmed-shift { background-color: var(--sch-dim); color: #333; border-radius: 8px; height: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; font-size: 10px; text-align: center; }
+
+        /* 顧展專屬網格 (5列) */
+        .exhibit-schedule-grid { display: grid; grid-template-columns: 40px repeat(5, 1fr); gap: 6px; min-width: 380px; }
 
         /* 展覽時程表格樣式 */
         .custom-schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
@@ -225,47 +231,117 @@
                 </div>
             </div>
 
+            <!-- B: 快閃排班 (已確定的排班表) -->
             <div id="tab-B" class="section">
                 <div class="sticky-header">
-                    <h3>快閃排班 (9/21-9/24)</h3>
-                    <p>請點擊下方空堂，<strong style="color: var(--sch-red);">請至少選擇 5 個時段</strong><br>（實際排班約安排 2-3 個時段）。</p>
+                    <h3>快閃活動輪班表</h3>
+                    <p>9/21-9/24</p>
                 </div>
                 <div class="card">
-                    <form onsubmit="submitShift(event, 'pop-up')">
+                    <div class="schedule-wrapper">
+                        <div class="schedule-grid">
+                            <div class="sch-time-col">
+                                <div class="time-label" style="top: 0px;">10:00</div>
+                                <div class="time-label" style="top: 46px;">11:00</div>
+                                <div class="time-label" style="top: 92px;">12:00</div>
+                                <div class="time-label" style="top: 138px;">13:00</div>
+                                <div class="time-label" style="top: 184px;">14:00</div>
+                                <div class="time-label" style="top: 230px;">15:00</div>
+                                <div class="time-label" style="top: 276px;">16:00</div>
+                                <div class="time-label" style="top: 322px;">17:00</div>
+                                <div class="time-label" style="top: 368px;">18:00</div>
+                            </div>
+                            <!-- 9/21 -->
+                            <div class="sch-day-col">
+                                <div class="sch-header">9/21<br>(一)</div>
+                                <div class="confirmed-shift"></div>
+                                <div class="confirmed-shift">蔡侑恩</div>
+                                <div class="confirmed-shift">洪叔妤</div>
+                                <div class="confirmed-shift">洪叔妤</div>
+                                <div class="confirmed-shift">徐蒂亞</div>
+                                <div class="confirmed-shift">徐蒂亞</div>
+                                <div class="confirmed-shift">蘇苗元</div>
+                                <div class="confirmed-shift">蘇苗元</div>
+                            </div>
+                            <!-- 9/22 -->
+                            <div class="sch-day-col">
+                                <div class="sch-header">9/22<br>(二)</div>
+                                <div class="confirmed-shift"></div>
+                                <div class="confirmed-shift">區嘉倩</div>
+                                <div class="confirmed-shift">蔡閔帆</div>
+                                <div class="confirmed-shift">蔡閔帆</div>
+                                <div class="confirmed-shift">蔡閔帆</div>
+                                <div class="confirmed-shift">洪叔妤</div>
+                                <div class="confirmed-shift">洪叔妤</div>
+                                <div class="confirmed-shift">欒定濂</div>
+                            </div>
+                            <!-- 9/23 -->
+                            <div class="sch-day-col">
+                                <div class="sch-header">9/23<br>(三)</div>
+                                <div class="confirmed-shift"></div>
+                                <div class="confirmed-shift">黃庭芸</div>
+                                <div class="confirmed-shift">賴昱蓁<br>劉心伃<br>李子睿<br>曹千窈</div>
+                                <div class="confirmed-shift">李軒妤<br>劉心伃<br>李子睿<br>曹千窈</div>
+                                <div class="confirmed-shift">王芷歆<br>張予彤<br>廖晏晨<br>曹千窈</div>
+                                <div class="confirmed-shift">王芷歆<br>張予彤<br>廖晏晨</div>
+                                <div class="confirmed-shift">林晏孜<br>林妍蓁<br>呂珮禎<br>李嘉欣</div>
+                                <div class="confirmed-shift">林晏孜<br>林妍蓁<br>洪叔妤<br>涂承軒<br>李嘉欣</div>
+                            </div>
+                            <!-- 9/24 -->
+                            <div class="sch-day-col">
+                                <div class="sch-header">9/24<br>(四)</div>
+                                <div class="confirmed-shift"></div>
+                                <div class="confirmed-shift">林芝愛<br>陳姿羽</div>
+                                <div class="confirmed-shift">劉心伃<br>黃珊妮<br>李軒妤<br>林宇鑫<br>陳姿羽<br>林妍蓁<br>祝承鈺</div>
+                                <div class="confirmed-shift">王芷歆<br>黃珊妮<br>李軒妤<br>林宇鑫<br>阮忠孝<br>莊岱諭</div>
+                                <div class="confirmed-shift">阮忠孝<br>林珈年<br>林宇鑫<br>洪叔妤</div>
+                                <div class="confirmed-shift">阮忠孝<br>林珈年<br>呂珮禎</div>
+                                <div class="confirmed-shift">林千又</div>
+                                <div class="confirmed-shift">林千又<br>徐捷<br>翁啟洲</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- F: 展期排班 (顧展輪班填寫區) -->
+            <div id="tab-F" class="section">
+                <div class="sticky-header">
+                    <h3>顧展輪班填寫</h3>
+                    <p>請點擊下方空堂以排定展期顧展時段</p>
+                </div>
+                <div class="card">
+                    <form onsubmit="submitExhibitShift(event)">
                         <label style="font-size:14px; font-weight:bold;">排班人員：</label>
-                        <input type="text" id="shift-name-popup" class="general-input" readonly style="background:#f4f6f8;">
+                        <input type="text" id="exhibit-shift-name-popup" class="general-input" readonly style="background:#f4f6f8;">
                         
                         <div class="schedule-wrapper">
-                            <div class="schedule-grid">
+                            <div class="exhibit-schedule-grid">
                                 <div class="sch-time-col">
-                                    <div class="time-label" style="top: 0px;">10:00</div>
-                                    <div class="time-label" style="top: 46px;">11:00</div>
-                                    <div class="time-label" style="top: 92px;">12:00</div>
-                                    <div class="time-label" style="top: 138px;">13:00</div>
-                                    <div class="time-label" style="top: 184px;">14:00</div>
-                                    <div class="time-label" style="top: 230px;">15:00</div>
-                                    <div class="time-label" style="top: 276px;">16:00</div>
-                                    <div class="time-label" style="top: 322px;">17:00</div>
-                                    <div class="time-label" style="top: 368px;">18:00</div>
+                                    <div class="time-label" style="top: 0px;">9:00</div>
+                                    <div class="time-label" style="top: 46px;">10:00</div>
+                                    <div class="time-label" style="top: 92px;">11:00</div>
+                                    <div class="time-label" style="top: 138px;">12:00</div>
+                                    <div class="time-label" style="top: 184px;">13:00</div>
+                                    <div class="time-label" style="top: 230px;">14:00</div>
+                                    <div class="time-label" style="top: 276px;">15:00</div>
+                                    <div class="time-label" style="top: 322px;">16:00</div>
+                                    <div class="time-label" style="top: 368px;">17:00</div>
                                 </div>
-                                <div class="sch-day-col"><div class="sch-header">9/21<br>(一)</div><button type="button" class="shift-btn popup-shift" data-time="9/21 10-11">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/21 11-12">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/21 12-13">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/21 13-14">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/21 14-15">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/21 15-16">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/21 16-17">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/21 17-18">選取</button></div>
-                                <div class="sch-day-col"><div class="sch-header">9/22<br>(二)</div><button type="button" class="shift-btn popup-shift" data-time="9/22 10-11">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/22 11-12">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/22 12-13">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/22 13-14">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/22 14-15">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/22 15-16">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/22 16-17">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/22 17-18">選取</button></div>
-                                <div class="sch-day-col"><div class="sch-header">9/23<br>(三)</div><button type="button" class="shift-btn popup-shift" data-time="9/23 10-11">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/23 11-12">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/23 12-13">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/23 13-14">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/23 14-15">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/23 15-16">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/23 16-17">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/23 17-18">選取</button></div>
-                                <div class="sch-day-col"><div class="sch-header">9/24<br>(四)</div><button type="button" class="shift-btn popup-shift" data-time="9/24 10-11">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/24 11-12">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/24 12-13">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/24 13-14">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/24 14-15">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/24 15-16">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/24 16-17">選取</button><button type="button" class="shift-btn popup-shift" data-time="9/24 17-18">選取</button></div>
+                                <div class="sch-day-col"><div class="sch-header">9/30<br>(三)</div><div style="height:132px;"></div><button type="button" class="shift-btn exhibit-shift" data-time="9/30 12-13">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="9/30 13-14">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="9/30 14-15">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="9/30 15-16">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="9/30 16-17">選取</button></div>
+                                <div class="sch-day-col"><div class="sch-header">10/1<br>(四)</div><button type="button" class="shift-btn exhibit-shift" data-time="10/1 9-10">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/1 10-11">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/1 11-12">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/1 12-13">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/1 13-14">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/1 14-15">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/1 15-16">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/1 16-17">選取</button></div>
+                                <div class="sch-day-col"><div class="sch-header">10/2<br>(五)</div><button type="button" class="shift-btn exhibit-shift" data-time="10/2 9-10">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/2 10-11">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/2 11-12">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/2 12-13">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/2 13-14">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/2 14-15">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/2 15-16">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/2 16-17">選取</button></div>
+                                <div class="sch-day-col"><div class="sch-header">10/3<br>(六)</div><button type="button" class="shift-btn exhibit-shift" data-time="10/3 9-10">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/3 10-11">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/3 11-12">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/3 12-13">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/3 13-14">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/3 14-15">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/3 15-16">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/3 16-17">選取</button></div>
+                                <div class="sch-day-col"><div class="sch-header">10/4<br>(日)</div><button type="button" class="shift-btn exhibit-shift" data-time="10/4 9-10">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/4 10-11">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/4 11-12">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/4 12-13">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/4 13-14">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/4 14-15">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/4 15-16">選取</button><button type="button" class="shift-btn exhibit-shift" data-time="10/4 16-17">選取</button></div>
                             </div>
                         </div>
 
-                        <input type="hidden" id="selected-shifts-popup" required>
-                        <p id="shift-count-display" style="font-size:13px; color:var(--sch-red); font-weight:bold; text-align:right; margin-top:-10px;">目前已選擇：0 個時段</p>
+                        <input type="hidden" id="exhibit-selected-shifts-popup" required>
+                        <p id="exhibit-shift-count-display" style="font-size:13px; color:var(--sch-red); font-weight:bold; text-align:right; margin-top:-10px;">目前已選擇：0 個時段</p>
 
                         <button type="submit" class="submit-btn" style="margin-top:10px;">送出至 Google 試算表</button>
                     </form>
                 </div>
-            </div>
-
-            <div id="tab-F" class="section">
-                <div class="sticky-header"><h3>展期排班 (9/30-10/4)</h3></div>
-                <div class="card"><p style="font-size:13px; color:#555;">(結構與快閃排班相同，未來可填入展期對應時段)</p></div>
             </div>
 
             <div id="tab-C" class="section">
@@ -293,22 +369,18 @@
                         <label style="font-size:13px; color:#555;">自動帶入經手人資訊：</label>
                         <input type="text" id="merch-staff-info" class="general-input" readonly style="background:#eee; font-weight:bold;">
                         
-                        <!-- 第一層：選擇動作 -->
                         <select id="merch-action" class="general-input" onchange="updateMerchOptions()" required style="margin-bottom: 10px;">
                             <option value="" disabled selected>請選擇動作：結帳 或 抽獎</option>
                             <option value="checkout">🛒 結帳</option>
                             <option value="lottery">🎁 抽獎</option>
                         </select>
 
-                        <!-- 學號輸入 -->
                         <input type="text" id="merch-buyer" class="general-input" placeholder="購買者 / 中獎者學號 (例:110xxxxxx)" required>
                         
-                        <!-- 第二層：選擇品項 -->
                         <select id="merch-item" class="general-input" required onchange="checkExtraFields()">
                             <option value="" disabled selected>請先選擇上方的動作...</option>
                         </select>
 
-                        <!-- 第三層：底片沖洗卷專用隱藏欄位 -->
                         <div id="extra-info-box" style="display:none; background: #fff3f5; padding: 15px; border-radius: 8px; border: 1px dashed var(--primary-color); margin-bottom: 15px;">
                             <p style="margin:0 0 10px 0; font-size:13px; color:var(--sch-red); font-weight:bold;">📸 抽中底片沖洗卷，請填寫中獎者資訊：</p>
                             <input type="text" id="winner-name" class="general-input" placeholder="姓名" style="margin-bottom:8px;">
@@ -410,33 +482,32 @@
             { name: "導覽三折頁", price: 0, desc: "展場現場獲得", stock: 200 }
         ];
 
-        // 重新對應 1-25 號的所有作品資料
         const exhibitionData = {
-            1: { title: "THE SUSPENDED GENERATION A Trilogy of Drifting, Pressure, and Dissolve", author: "林千又", media: "Illustrator", size: "A3", concept: "本作品以「懸浮世代」為主題，探討現代年輕人在快速變動的社會中所面臨的迷惘與焦慮。透過〈Drifting〉、〈Pressure〉與〈Dissolve〉三部曲，主要以字體設計呈現個體在城市中尋找定位卻無所依歸的漂流狀態，逐漸被現實與期待擠壓，最終在長期消耗下失去自我、逐漸消散的過程。\n\n📢 觀展提醒：請勿觸摸" },
-            2: { title: "Whimsy", author: "江安嫻", media: "複合媒材", size: "49×49×30（cm）", concept: "做出了自己童年幻想中的物品，像是換裝遊戲、小夜燈和皇冠，希望大家可以一起享受可愛的力量₊⁺♡₊⁺\n\n📢 觀展提醒：歡迎互動" },
-            3: { title: "Blooming dissolve", author: "洪叔妤", media: "攝影", size: "50×40、 4×6、5×7", concept: "青春就像一顆投入水中的發泡錠，那些尚未完成的夢，並未消失，而是在時間裡慢慢擴散。 花朵作為象徵，慢快門紀錄流動，模糊的畫面是存在的痕跡，在朦朧與鮮明之間，溢出，如同我們不應被定義，也不該被侷限。 還有很多夢，持續綻放。\n\n📢 觀展提醒：請勿觸摸" },
-            4: { title: "框", author: "洪叔妤", media: "攝影", size: "4×6", concept: "我們總在追求完美，看似耀眼無比，剖開卻是一片虛無。那些被刻意隱藏、遺忘的瑕疵與真實，從無法被裝進精美的框架裡。 總被告知要凝視美好的未來；但真正支撐著我們的，永遠是框外那些平凡而扎實的現實。\n\n📢 觀展提醒：請勿觸摸" },
-            5: { title: "盛夏 剩下", author: "黃珊妮", media: "複合媒材", size: "A3、A5", concept: "盛夏總是承載著最燦爛的記憶，但盛夏過去，季節不斷更迭，剩下被時間切割成的片片碎屑；碎片並非終點，成為了滋養下一個季節的土壤，我們在遺憾與失去中重構自我，繼續走向下一個季節，等待下一次盛夏的到來。" },
-            6: { title: "餘溫", author: "莊岱諭", media: "壓克力顏料、 樹脂土", size: "15×65 、30×30 (cm)", concept: "泡泡對我而言，象徵著生命中那些美好卻短暫的瞬間。雖然我們無法留住每一刻，但我相信每個當下的美好與感動，都會以不同的形式留存在心中，成為生命的一部分，也讓我們更懂得珍惜眼前的一切。\n\n📢 觀展提醒：旁邊有一區大概30*30會讓人貼便條紙！（互動式的作品 可以留言）我有便條紙想讓看的人留言～但作品本身不想讓人觸碰！" },
-            7: { title: "第十八場潮汐", author: "林宇鑫", media: "複合媒材", size: "40×40×30（cm）", concept: "記憶像潮水反覆來去，每次回望都重新沖刷著熟悉的事物：童年的陽光、冷飲冰塊的碰撞聲或嘴角遺留的糖漬。而作品以無限延伸的雜貨店模型作為記憶載體，琳瑯滿目的零食與玩具如同孩童無止盡的幻想。空間越熟悉，卻越走不到盡頭。\n\n📢 觀展提醒：請勿觸摸" },
-            8: { title: "視差", author: "張予彤", media: "光柵攝影輸出、電話聽筒、布料、按鈕", size: "30×40（cm）", concept: "「視差」源於觀看角度的改變，也象徵我們對現實的感知並非固定。作品以光柵攝影呈現同一影像在不同視角下的變化，如同夢境與現實之間模糊而不穩定的界線。展示台上的電話則像夢中突然出現的物件，按下按鈕後，從聽筒傳來由美好逐漸失真的聲音，讓視覺與聽覺共同進入一段無法預測的夢。\n\n📢 觀展提醒：歡迎互動" },
-            9: { title: "夢醒之後", author: "蔡閔帆", media: "攝影、電繪", size: "A3", concept: "就算被塞進「長大」的模具，咀嚼著枯燥的現實，但依然能在日常縫隙裡，吹起一顆巨大的粉色泡泡。\n「啵！」一聲，當泡泡在現實面前破裂，正是想像力四濺的瞬間。在成人世界灰白的表面上，任性地留下黏膩、俏皮又繽紛的糖衣印記。\n\n📢 觀展提醒：請勿觸摸" },
-            10: { title: "Still Blowing：夏日標本", author: "劉心伃", media: "新媒、攝影、立體", size: "30×40×50（cm）", concept: "電風扇象徵夏天、青春與記憶、以及有流動的意象。作品以泡泡糖色彩重新塗裝，營造甜美、夢幻且童趣，然而被絲帶束縛的電風扇，以及後方攝影作品，逐漸揭露夢幻下的壓抑。想透過超現實的手法，模糊人與物件的邊界，讓觀者在熟悉與陌生之間游移，越看越怪。那些看起來美好的色彩，不一定是真正的快樂，只是一層覆蓋在束縛之上的糖衣。\n\n📢 觀展提醒：請勿觸摸" },
-            11: { title: "我和狐的夏天", author: "謝其聿", media: "數位媒體（電腦）", size: "27吋螢幕", concept: "以夏日重逢為起點，透過人與狐仙的相遇，描繪親情、思念與愛情交織而成的夏日物語，讓玩家在溫暖與淡淡感傷之中，以「珍惜當下」為作品的核心價值。" },
-            12: { title: "Girlhood", author: "蘇苗元", media: "電繪方式繪製繪本，送印做成實體書", size: "15×15（cm）", concept: "少女時代總被描繪成粉紅、夢幻而美好的模樣，但現實並非如此。青春期對自我與同儕關係的探索，對未來的憧憬與不安，交織成少女時代。經歷當下只覺得痛苦，直到脫離那段時光，回首過往，才發現其中獨有的美。回憶如一層濾鏡，使少女時代顯得比現實更加美好。然而，若一味沉溺於被美化的過去，便可能失去面對當下生活的勇氣。\n\n📢 觀展提醒：歡迎互動" },
-            13: { title: "Proof", author: "賴昱蓁", media: "酒瓶/杯、毛線、棉花、紙板", size: "21×6、7×4、30×25×22（cm）", concept: "Proof在英文裡既有「證據」，也有「酒精純度」的意思。\n18歲後許多人拿可以買菸喝酒作為成年的象徵（證據），但這些不過是傷身、益處不多的事情。與其用成癮品證明長大，不如用這些溫暖、柔軟的造物，去定義屬於自己、真正對生命有益的成年禮。\n\n📢 觀展提醒：歡迎放上你的娃娃拍照(˶˃ ᵕ ˂˶) .ᐟ.ᐟ 上面的星星沒有固定，請小心輕放" },
-            14: { title: "浮光夏夢", author: "林少棻", media: "複合媒材", size: "40×10×27（cm）", concept: "夏天總是短暫，卻常留下最深刻的記憶。本作品以一包冷泡茶作為媒介，結合活版印刷包裝，將「等待」轉化為一種可以帶走的體驗。冷泡茶需要時間，活版印刷也需要時間；它們都無法被快速完成。希望觀者在展覽中，除了觀看，也能帶走一段屬於自己的夏日時光。\n\n📢 觀展提醒：如果願意， 可以帶走一包茶。 願它陪你，把今天過得慢一點。" },
-            15: { title: "夏天的使用說明書", author: "林少棻", media: "印刷出版", size: "14.8×21（cm）", concept: "我們習慣閱讀說明書，是為了快速理解一件事；而這本「使用說明書」希望邀請觀者放慢閱讀速度。它不是教你如何泡一杯茶，而是透過印刷、紙張與文字，重新感受等待、留白與日常節奏。閱讀的過程，也是一場屬於夏天的小小停留。\n\n📢 觀展提醒：請慢慢翻閱， 也許你會找到今天適合的一頁。" },
-            16: { title: "見 夏", author: "呂珮禎", media: "攝影、立體", size: "420×594(mm)、A2 203 × 254(mm)、10吋", concept: "在繁忙的日常裡，熾熱的夏總是為忙碌的人帶來些許焦躁。連眼前的風景，也彷彿染上了這份情緒。但在我的夢裡，夏天卻是另一副模樣。它是一個閃閃發光的季節。陽光落在水面，碎成粼粼的光；氣泡在舌尖炸開，帶來清爽的涼意；熱氣使遠方的景色失去輪廓，變得柔軟而朦朧。希望可以透過此作品，讓觀者見到我夢中的夏，在光影之間感受到夏天的美好。\n\n📢 觀展提醒：請勿觸摸" },
-            17: { title: "記憶中的錯客", author: "蔡睿芯", media: "螢幕", size: "電腦尺寸", concept: "成年後，我們總習慣躲進一個被理想化的童年泡泡裡。\n在那座熟悉的遊樂場中，那些陪著自己盪鞦韆、大笑的玩伴，或許他們從未真正存在，只是記憶在留白處， 因寂寞而折射出的、短暫落腳的錯客。" },
-            18: { title: "失樂園", author: "黃庭芸", media: "pp板、銅線、棉花、珍珠", size: "59.4×84.1×6", concept: "當畫中的美好與衝破畫面的魚骨殘骸彼此交錯，究竟哪一個才是真實？又或者，所謂的真實，本身就是另一場夢。\n\n📢 觀展提醒：請勿觸摸" },
-            19: { title: "Beyond the Window 我們曾經靠想像旅行", author: "何惠俞", media: "實拍的風景影片、動畫、紙板", size: "影片16:9", concept: "童年搭車時，總喜歡望著車窗外，讓想像隨著流動的風景自由延伸。長大後，電子產品的螢幕逐漸取代了窗外風景，也慢慢失去了這份想像力。作品透過拍攝車窗外景色，結合手繪動畫，將童年腦海中的幻想重新投射於現實，喚起那些曾經只靠想像便能旅行的時光。" },
-            20: { title: "卵泡", author: "陳姿羽", media: "水彩紙、複合媒材", size: "30×90（cm）", concept: "我們從卵中而來，由分裂和聚合組成個體。眼睛、骨骼、腸道，它們被包裹在一個個透明的薄膜裡，共同構成我們所認知的「人」。只是泡沫終會破裂，那些構成我們的成分終將隨著時間分散，一旦完整的形體被一一拆解，我們是否還能辨認出原本的自己？又或者，所謂的「我們」，本來就只是無數虛影重疊後的結果。\n\n📢 觀展提醒：請勿觸摸" },
-            21: { title: "POP", author: "高顥禎", media: "複合媒材", size: "A3", concept: "以戳戳樂作為童年渴望的載體，連結展示與互動。透過戳破完美的包裝，邀請觀者在破裂後共同創作，重新拼湊散落的記憶。" },
-            22: { title: "But you", author: "蔡侑恩", media: "壓克力顏料、代針筆、麥克筆、保麗龍膠、亮粉", size: "32×32（cm）", concept: "羽鱗蔓生 脈息顫始\n夢像 逐漸剝離崩解\n褪去 原始的細胞膜\n孵化出 湛青的鼓動\n\n靈澈的眼瞳綻放\n瑩透的軀體甦醒\n沉醉浮盪粼漪間\n映入眼簾的初景\n幻彩一般的片影\n\n溫存你眸中的記憶\n化為流光螢絮悠游\n縈繞烙印在我心頭\n\n(P.S. but you是諧音哽喔(^_-)-☆)\n\n📢 觀展提醒：翻過來看看！" },
-            23: { title: "觀景窗", author: "蔡侑恩", media: "畫布、壓克力顏料、玻璃魚缸、打氧機、亮面紙板", size: "35×25×30（cm）", concept: "這是我在腦中一隅一直浮現的景象。\n自己或飄或坐地住在一個宛如太空艙的半透明房間內，面對著一面彷彿螢幕一般切換著現實所見或是想像的落地窗。當自己很罕見的在放空的時候則會顯示出俯瞰的地球，偶爾也會顯現出隨機姿態、出現在隨機地點，有意識地睜大眼睛、沉默地注視著房內自己的分身。\n這次出現的分身似乎忘記天使的光環是水溶性的了。再見。\n\n📢 觀展提醒：請勿觸摸" },
+            1: { title: "Beyond the Window 我們曾經靠想像旅行", author: "何惠俞", media: "實拍的風景影片、動畫、紙板", size: "影片16:9", concept: "童年搭車時，總喜歡望著車窗外，讓想像隨著流動的風景自由延伸。長大後，電子產品的螢幕逐漸取代了窗外風景，也慢慢失去了這份想像力。作品透過拍攝車窗外景色，結合手繪動畫，將童年腦海中的幻想重新投射於現實，喚起那些曾經只靠想像便能旅行的時光。" },
+            2: { title: "視差", author: "張予彤", media: "光柵攝影輸出、電話聽筒、布料、按鈕", size: "30×40（cm）", concept: "「視差」源於觀看角度的改變，也象徵我們對現實的感知並非固定。作品以光柵攝影呈現同一影像在不同視角下的變化，如同夢境與現實之間模糊而不穩定的界線。展示台上的電話則像夢中突然出現的物件，按下按鈕後，從聽筒傳來由美好逐漸失真的聲音，讓視覺與聽覺共同進入一段無法預測的夢。" },
+            3: { title: "框", author: "洪叔妤", media: "攝影", size: "4×6", concept: "我們總在追求完美，看似耀眼無比，剖開卻是一片虛無。那些被刻意隱藏、遺忘的瑕疵與真實，從無法被裝進精美的框架裡。 總被告知要凝視美好的未來；但真正支撐著我們的，永遠是框外那些平凡而扎實的現實。" },
+            4: { title: "卵泡", author: "陳姿羽", media: "水彩紙、複合媒材", size: "30×90（cm）", concept: "我們從卵中而來，由分裂和聚合組成個體。眼睛、骨骼、腸道，它們被包裹在一個個透明的薄膜裡，共同構成我們所認知的「人」。只是泡沫終會破裂，那些構成我們的成分終將隨著時間分散，一旦完整的形體被一一拆解，我們是否還能辨認出原本的自己？又或者，所謂的「我們」，本來就只是無數虛影重疊後的結果。" },
+            5: { title: "失樂園", author: "黃庭芸", media: "pp板、銅線、棉花、珍珠", size: "59.4×84.1×6", concept: "當畫中的美好與衝破畫面的魚骨殘骸彼此交錯，究竟哪一個才是真實？又或者，所謂的真實，本身就是另一場夢。" },
+            6: { title: "THE SUSPENDED GENERATION A Trilogy of Drifting, Pressure, and Dissolve", author: "林千又", media: "Illustrator", size: "A3", concept: "本作品以「懸浮世代」為主題，探討現代年輕人在快速變動的社會中所面臨的迷惘與焦慮。透過〈Drifting〉、〈Pressure〉與〈Dissolve〉三部曲，主要以字體設計呈現個體在城市中尋找定位卻無所依歸的漂流狀態，逐漸被現實與期待擠壓，最終在長期消耗下失去自我、逐漸消散的過程。" },
+            7: { title: "POP", author: "高顥禎", media: "複合媒材", size: "A3", concept: "以戳戳樂作為童年渴望的載體，連結展示與互動。透過戳破完美的包裝，邀請觀者在破裂後共同創作，重新拼湊散落的記憶。" },
+            8: { title: "記憶中的錯客", author: "蔡睿芯", media: "螢幕", size: "電腦尺寸", concept: "成年後，我們總習慣躲進一個被理想化的童年泡泡裡。\n在那座熟悉的遊樂場中，那些陪著自己盪鞦韆、大笑的玩伴，或許他們從未真正存在，只是記憶在留白處， 因寂寞而折射出的、短暫落腳的錯客。" },
+            9: { title: "盛夏 剩下", author: "黃珊妮", media: "複合媒材", size: "A3、A5", concept: "盛夏總是承載著最燦爛的記憶，但盛夏過去，季節不斷更迭，剩下被時間切割成的片片碎屑；碎片並非終點，成為了滋養下一個季節的土壤，我們在遺憾與失去中重構自我，繼續走向下一個季節，等待下一次盛夏的到來。" },
+            10: { title: "Whimsy", author: "江安嫻", media: "複合媒材", size: "49×49×30（cm）", concept: "做出了自己童年幻想中的物品，像是換裝遊戲、小夜燈和皇冠，希望大家可以一起享受可愛的力量₊⁺♡₊⁺\n\n📢 觀展提醒：歡迎互動" },
+            11: { title: "Proof", author: "賴昱蓁", media: "酒瓶/杯、毛線、棉花、紙板", size: "21×6、7×4、30×25×22（cm）", concept: "Proof在英文裡既有「證據」，也有「酒精純度」的意思。\n18歲後許多人拿可以買菸喝酒作為成年的象徵（證據），但這些不過是傷身、益處不多的事情。與其用成癮品證明長大，不如用這些溫暖、柔軟的造物，去定義屬於自己、真正對生命有益的成年禮。\n\n📢 觀展提醒：歡迎放上你的娃娃拍照(˶˃ ᵕ ˂˶) .ᐟ.ᐟ 上面的星星沒有固定，請小心輕放" },
+            12: { title: "觀景窗", author: "蔡侑恩", media: "畫布、壓克力顏料、玻璃魚缸、打氧機、亮面紙板", size: "35×25×30（cm）", concept: "這是我在腦中一隅一直浮現的景象。\n自己或飄或坐地住在一個宛如太空艙的半透明房間內，面對著一面彷彿螢幕一般切換著現實所見或是想像的落地窗。當自己很罕見的在放空的時候則會顯示出俯瞰的地球，偶爾也會顯現出隨機姿態、出現在隨機地點，有意識地睜大眼睛、沉默地注視著房內自己的分身。\n這次出現的分身似乎忘記天使的光環是水溶性的了。再見。\n\n📢 觀展提醒：請勿觸摸" },
+            13: { title: "餘溫", author: "莊岱諭", media: "壓克力顏料、 樹脂土", size: "15×65 、30×30 (cm)", concept: "泡泡對我而言，象徵著生命中那些美好卻短暫的瞬間。雖然我們無法留住每一刻，但我相信每個當下的美好與感動，都會以不同的形式留存在心中，成為生命的一部分，也讓我們更懂得珍惜眼前的一切。\n\n📢 觀展提醒：旁邊有一區大概30*30會讓人貼便條紙！（互動式的作品 可以留言）我有便條紙想讓看的人留言～但作品本身不想讓人觸碰！" },
+            14: { title: "夏天的使用說明書", author: "林少棻", media: "印刷出版", size: "14.8×21（cm）", concept: "我們習慣閱讀說明書，是為了快速理解一件事；而這本「使用說明書」希望邀請觀者放慢閱讀速度。它不是教你如何泡一杯茶，而是透過印刷、紙張與文字，重新感受等待、留白與日常節奏。閱讀的過程，也是一場屬於夏天的小小停留。" },
+            15: { title: "Still Blowing：夏日標本", author: "劉心伃", media: "新媒、攝影、立體", size: "30×40×50（cm）", concept: "電風扇象徵夏天、青春與記憶、以及有流動的意象。作品以泡泡糖色彩重新塗裝，營造甜美、夢幻且童趣，然而被絲帶束縛的電風扇，以及後方攝影作品，逐漸揭露夢幻下的壓抑。想透過超現實的手法，模糊人與物件的邊界，讓觀者在熟悉與陌生之間游移，越看越怪。那些看起來美好的色彩，不一定是真正的快樂，只是一層覆蓋在束縛之上的糖衣。" },
+            16: { title: "Blooming dissolve", author: "洪叔妤", media: "攝影", size: "50×40、 4×6、5×7", concept: "青春就像一顆投入水中的發泡錠，那些尚未完成的夢，並未消失，而是在時間裡慢慢擴散。 花朵作為象徵，慢快門紀錄流動，模糊的畫面是存在的痕跡，在朦朧與鮮明之間，溢出，如同我們不應被定義，也不該被侷限。 還有很多夢，持續綻放。" },
+            17: { title: "夢醒之後", author: "蔡閔帆", media: "攝影、電繪", size: "A3", concept: "就算被塞進「長大」的模具，咀嚼著枯燥的現實，但依然能在日常縫隙裡，吹起一顆巨大的粉色泡泡。\n「啵！」一聲，當泡泡在現實面前破裂，正是想像力四濺的瞬間。在成人世界灰白的表面上，任性地留下黏膩、俏皮又繽紛的糖衣印記。" },
+            18: { title: "But you", author: "蔡侑恩", media: "壓克力顏料、代針筆、麥克筆、保麗龍膠、亮粉", size: "32×32（cm）", concept: "羽鱗蔓生 脈息顫始\n夢像 逐漸剝離崩解\n褪去 原始的細胞膜\n孵化出 湛青的鼓動\n\n靈澈的眼瞳綻放\n瑩透的軀體甦醒\n沉醉浮盪粼漪間\n映入眼簾的初景\n幻彩一般的片影\n\n溫存你眸中的記憶\n化為流光螢絮悠游\n縈繞烙印在我心頭\n\n(P.S. but you是諧音哽喔(^_-)-☆)\n\n📢 觀展提醒：翻過來看看！" },
+            19: { title: "浮光夏夢", author: "林少棻", media: "複合媒材", size: "40×10×27（cm）", concept: "夏天總是短暫，卻常留下最深刻的記憶。本作品以一包冷泡茶作為媒介，結合活版印刷包裝，將「等待」轉化為一種可以帶走的體驗。冷泡茶需要時間，活版印刷也需要時間；它們都無法被快速完成。希望觀者在展覽中，除了觀看，也能帶走一段屬於自己的夏日時光。" },
+            20: { title: "第十八場潮汐", author: "林宇鑫", media: "複合媒材", size: "40×40×30（cm）", concept: "記憶像潮水反覆來去，每次回望都重新沖刷著熟悉的事物：童年的陽光、冷飲冰塊的碰撞聲或嘴角遺留的糖漬。而作品以無限延伸的雜貨店模型作為記憶載體，琳瑯滿目的零食與玩具如同孩童無止盡的幻想。空間越熟悉，卻越走不到盡頭。" },
+            21: { title: "夢境的現實", author: "陳彥錡", media: "紙材", size: "對開", concept: "以窺探空洞為出發點，透過畫布上的鏤空部分對應的另一面，探索我們自身不管在現實還是虛擬夢境中的共通點，也藉由空洞觀察自身不同的面向。空洞象徵不管在現實亦是夢境中自己的缺陷與一致性。" },
+            22: { title: "Girlhood", author: "蘇苗元", media: "電繪方式繪製繪本，送印做成實體書", size: "15×15（cm）", concept: "少女時代總被描繪成粉紅、夢幻而美好的模樣，但現實並非如此。青春期對自我與同儕關係的探索，對未來的憧憬與不安，交織成少女時代。經歷當下只覺得痛苦，直到脫離那段時光，回首過往，才發現其中獨有的美。回憶如一層濾鏡，使少女時代顯得比現實更加美好。然而，若一味沉溺於被美化的過去，便可能失去面對當下生活的勇氣。" },
+            23: { title: "見 夏", author: "呂珮禎", media: "攝影、立體", size: "420×594(mm)、A2 203 × 254(mm)、10吋", concept: "在繁忙的日常裡，熾熱的夏總是為忙碌的人帶來些許焦躁。連眼前的風景，也彷彿染上了這份情緒。但在我的夢裡，夏天卻是另一副模樣。它是一個閃閃發光的季節。陽光落在水面，碎成粼粼的光；氣泡在舌尖炸開，帶來清爽的涼意；熱氣使遠方的景色失去輪廓，變得柔軟而朦朧。希望可以透過此作品，讓觀者見到我夢中的夏，在光影之間感受到夏天的美好。" },
             24: { title: "New Born", author: "林珈年", media: "20f畫", size: "72.5 × 60.5（cm)", concept: "俯瞰骨盆的輪廓，宛如花朵與蝴蝶。骨盆是人類出生的起點，花開則是植物的新生。《New Born》以紅橘色調將人體結構與花卉融合，傳達人類本質上也是自然界的一株植物，與萬物擁有相同的份量，在大自然裡平等且熱烈地綻放。" },
-            25: { title: "夢境的現實", author: "陳彥錡", media: "紙材", size: "對開", concept: "以窺探空洞為出發點，透過畫布上的鏤空部分對應的另一面，探索我們自身不管在現實還是虛擬夢境中的共通點，也藉由空洞觀察自身不同的面向。空洞象徵不管在現實亦是夢境中自己的缺陷與一致性。\n\n📢 觀展提醒：請勿觸摸" }
+            25: { title: "我和狐的夏天", author: "謝其聿", media: "數位媒體（電腦）", size: "27吋螢幕", concept: "以夏日重逢為起點，透過人與狐仙的相遇，描繪親情、思念與愛情交織而成的夏日物語，讓玩家在溫暖與淡淡感傷之中，以「珍惜當下」為作品的核心價值。" }
         };
 
         function goToLogin() { document.getElementById('page-landing').classList.remove('active'); document.getElementById('page-login').classList.add('active'); }
@@ -475,7 +546,7 @@
                 
                 if(currentUser.role === 'curator') {
                     nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-C', event)">理念/排程</button><button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button><button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button><button class="nav-btn" onclick="switchTab('tab-B', event)">快閃排班</button><button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-F', event)">展期排班</button>`;
-                    document.getElementById('shift-name-popup').value = currentUser.name;
+                    document.getElementById('exhibit-shift-name-popup').value = currentUser.name;
                 } else {
                     nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-C', event)">理念/排程</button><button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button><button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button><button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-F', event)">展期排班</button>`;
                 }
@@ -695,9 +766,6 @@
             });
         }
 
-        // ==========================================
-        // 新增的連動選單邏輯
-        // ==========================================
         function updateMerchOptions() {
             const action = document.getElementById('merch-action').value;
             const itemSelect = document.getElementById('merch-item');
@@ -724,7 +792,7 @@
                     <option value="壓克力鏡面吊飾">壓克力鏡面吊飾</option>
                 `;
             }
-            checkExtraFields(); // 切換時自動重置隱藏欄位
+            checkExtraFields();
         }
 
         function checkExtraFields() {
@@ -734,11 +802,9 @@
 
             if (item === '底片沖洗卷') {
                 extraBox.style.display = 'block';
-                // 設定為必填
                 reqFields.forEach(id => document.getElementById(id).required = true);
             } else {
                 extraBox.style.display = 'none';
-                // 取消必填並清空內容
                 reqFields.forEach(id => {
                     document.getElementById(id).required = false;
                     document.getElementById(id).value = '';
@@ -758,7 +824,6 @@
             const action = document.getElementById('merch-action').value;
             let finalItem = document.getElementById('merch-item').value;
 
-            // 如果是底片沖洗卷，就把輸入的資訊合併在一起
             if (finalItem === '底片沖洗卷') {
                 const wName = document.getElementById('winner-name').value.trim();
                 const wPhone = document.getElementById('winner-phone').value.trim();
@@ -766,7 +831,6 @@
                 finalItem = `底片沖洗卷 (姓名:${wName}, 電話:${wPhone}, IG:${wIg})`;
             }
 
-            // 如果動作是抽獎，就在品項前加上 (抽) 的標記
             if (action === 'lottery') {
                 finalItem = `(抽) ${finalItem}`;
             }
@@ -794,7 +858,6 @@
                 const timeString = time.getHours() + ':' + String(time.getMinutes()).padStart(2, '0');
                 alert(`✅ 紀錄成功！時間：${timeString}\n(資料已成功傳送至 Google 試算表)`);
                 
-                // 清空表單狀態
                 document.getElementById('merch-buyer').value = '';
                 document.getElementById('merch-action').selectedIndex = 0;
                 updateMerchOptions(); 
@@ -840,32 +903,28 @@
             lastScrollY = window.scrollY;
         });
 
-        let selectedShifts = [];
-        document.querySelectorAll('.popup-shift').forEach(btn => {
+        // 顧展排班邏輯 (展期排班)
+        let exhibitSelectedShifts = [];
+        document.querySelectorAll('.exhibit-shift').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const timeStr = btn.getAttribute('data-time');
                 if (btn.classList.contains('selected')) {
                     btn.classList.remove('selected'); btn.innerText = '選取';
-                    selectedShifts = selectedShifts.filter(t => t !== timeStr);
+                    exhibitSelectedShifts = exhibitSelectedShifts.filter(t => t !== timeStr);
                 } else {
                     btn.classList.add('selected'); btn.innerText = '已選';
-                    selectedShifts.push(timeStr);
+                    exhibitSelectedShifts.push(timeStr);
                 }
-                const counterDisplay = document.getElementById('shift-count-display');
-                if (selectedShifts.length >= 5) {
-                    counterDisplay.innerHTML = `目前已選擇：<span style="color: #4CAF50;">${selectedShifts.length}</span> 個時段 (符合條件)`;
-                    counterDisplay.style.color = '#555';
-                } else {
-                    counterDisplay.innerHTML = `目前已選擇：${selectedShifts.length} 個時段 (最少需選 5 個)`;
-                    counterDisplay.style.color = 'var(--sch-red)';
-                }
-                document.getElementById('selected-shifts-popup').value = selectedShifts.join(', ');
+                const counterDisplay = document.getElementById('exhibit-shift-count-display');
+                counterDisplay.innerHTML = `目前已選擇：<span style="color: #4CAF50;">${exhibitSelectedShifts.length}</span> 個時段`;
+                counterDisplay.style.color = '#555';
+                document.getElementById('exhibit-selected-shifts-popup').value = exhibitSelectedShifts.join(', ');
             });
         });
         
-        function submitShift(e, type) {
+        function submitExhibitShift(e) {
             e.preventDefault();
-            if(selectedShifts.length < 5) return alert('排班資料不完整：請至少選擇 5 個空堂時段喔！');
+            if(exhibitSelectedShifts.length === 0) return alert('排班資料不完整：請至少選擇 1 個空堂時段喔！');
 
             const submitBtn = e.target.querySelector('.submit-btn');
             submitBtn.innerText = '資料傳送中...';
@@ -873,8 +932,9 @@
             submitBtn.disabled = true;
 
             const formData = new FormData();
-            formData.append('name', document.getElementById('shift-name-popup').value);
-            formData.append('shifts', selectedShifts.join(', '));
+            formData.append('name', document.getElementById('exhibit-shift-name-popup').value);
+            // 加上 (顧展) 前綴
+            formData.append('shifts', '(顧展) ' + exhibitSelectedShifts.join(', '));
         
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
@@ -882,7 +942,7 @@
             })
             .then(response => response.text())
             .then(result => {
-                alert(`✅ 排班暫存成功！\n共選擇了 ${selectedShifts.length} 個時段。\n(資料已成功寫入 Google 試算表)`);
+                alert(`✅ 顧展排班暫存成功！\n共選擇了 ${exhibitSelectedShifts.length} 個時段。\n(資料已成功寫入 Google 試算表)`);
                 submitBtn.innerText = '送出至 Google 試算表';
                 submitBtn.style.opacity = '1';
                 submitBtn.disabled = false;
