@@ -92,7 +92,7 @@
         .artwork-btn { position: absolute; width: 26px; height: 26px; background-color: #fff; color: var(--text-color); border: 2px solid var(--primary-color); border-radius: 50%; font-size: 11px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: 0.2s; transform: translate(-50%, -50%); display: flex; justify-content: center; align-items: center; padding: 0; z-index: 5; }
         .artwork-btn:hover, .artwork-btn.active-btn { transform: translate(-50%, -50%) scale(1.2); background-color: var(--primary-color); color: white; z-index: 10; }
 
-        /* 快閃與顧展 排班表樣式 */
+        /* 快閃排班 課表樣式 */
         .schedule-wrapper { overflow-x: auto; background: var(--sch-bg); padding: 15px; border-radius: 15px; margin-top: 10px; margin-bottom: 20px; box-shadow: inset 0 0 8px rgba(0,0,0,0.05); }
         .schedule-grid { display: grid; grid-template-columns: 40px repeat(4, 1fr); gap: 6px; min-width: 320px; }
         .sch-time-col { position: relative; margin-top: 30px; height: 368px; }
@@ -101,12 +101,16 @@
         .sch-header { font-size: 12px; font-weight: bold; text-align: center; color: var(--sch-red); height: 24px; line-height: 1.2; display: flex; flex-direction: column; justify-content: center; }
         .shift-btn { background-color: var(--sch-dim); color: white; border: none; border-radius: 8px; height: 40px; display: block; width: 100%; font-size: 11px; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .shift-btn.selected { background-color: var(--sch-red); box-shadow: 0 2px 5px rgba(169, 27, 32, 0.4); transform: scale(0.98); }
-        
-        /* 確定的班表專用，沒有 hover，沒有 pointer */
-        .confirmed-shift { background-color: var(--sch-dim); color: #333; border-radius: 8px; height: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; font-size: 10px; text-align: center; }
 
         /* 顧展專屬網格 (5列) */
         .exhibit-schedule-grid { display: grid; grid-template-columns: 40px repeat(5, 1fr); gap: 6px; min-width: 380px; }
+        
+        /* 確定的班表專用，沒有 hover，沒有 pointer */
+        .confirmed-shift { background-color: white; color: #444; border: 1px solid var(--sch-dim); border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; font-size: 13px; text-align: center; padding: 8px 0; line-height: 1.5; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+
+        /* 動態自適應高度網格 (專給確定的快閃班表使用，間隔變大) */
+        .schedule-grid-auto { display: grid; grid-template-columns: 45px repeat(4, 1fr); gap: 8px; min-width: 380px; align-items: stretch; }
+        .time-label-auto { font-size: 11px; color: var(--sch-red); font-weight: bold; text-align: center; display: flex; flex-direction: column; justify-content: center; background: #fff3f5; border-radius: 8px; padding: 5px 0;}
 
         /* 展覽時程表格樣式 */
         .custom-schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
@@ -239,66 +243,63 @@
                 </div>
                 <div class="card">
                     <div class="schedule-wrapper">
-                        <div class="schedule-grid">
-                            <div class="sch-time-col">
-                                <div class="time-label" style="top: 0px;">10:00</div>
-                                <div class="time-label" style="top: 46px;">11:00</div>
-                                <div class="time-label" style="top: 92px;">12:00</div>
-                                <div class="time-label" style="top: 138px;">13:00</div>
-                                <div class="time-label" style="top: 184px;">14:00</div>
-                                <div class="time-label" style="top: 230px;">15:00</div>
-                                <div class="time-label" style="top: 276px;">16:00</div>
-                                <div class="time-label" style="top: 322px;">17:00</div>
-                                <div class="time-label" style="top: 368px;">18:00</div>
-                            </div>
-                            <!-- 9/21 -->
-                            <div class="sch-day-col">
-                                <div class="sch-header">9/21<br>(一)</div>
-                                <div class="confirmed-shift"></div>
-                                <div class="confirmed-shift">蔡侑恩</div>
-                                <div class="confirmed-shift">洪叔妤</div>
-                                <div class="confirmed-shift">洪叔妤</div>
-                                <div class="confirmed-shift">徐蒂亞</div>
-                                <div class="confirmed-shift">徐蒂亞</div>
-                                <div class="confirmed-shift">蘇苗元</div>
-                                <div class="confirmed-shift">蘇苗元</div>
-                            </div>
-                            <!-- 9/22 -->
-                            <div class="sch-day-col">
-                                <div class="sch-header">9/22<br>(二)</div>
-                                <div class="confirmed-shift"></div>
-                                <div class="confirmed-shift">區嘉倩</div>
-                                <div class="confirmed-shift">蔡閔帆</div>
-                                <div class="confirmed-shift">蔡閔帆</div>
-                                <div class="confirmed-shift">蔡閔帆</div>
-                                <div class="confirmed-shift">洪叔妤</div>
-                                <div class="confirmed-shift">洪叔妤</div>
-                                <div class="confirmed-shift">欒定濂</div>
-                            </div>
-                            <!-- 9/23 -->
-                            <div class="sch-day-col">
-                                <div class="sch-header">9/23<br>(三)</div>
-                                <div class="confirmed-shift"></div>
-                                <div class="confirmed-shift">黃庭芸</div>
-                                <div class="confirmed-shift">賴昱蓁<br>劉心伃<br>李子睿<br>曹千窈</div>
-                                <div class="confirmed-shift">李軒妤<br>劉心伃<br>李子睿<br>曹千窈</div>
-                                <div class="confirmed-shift">王芷歆<br>張予彤<br>廖晏晨<br>曹千窈</div>
-                                <div class="confirmed-shift">王芷歆<br>張予彤<br>廖晏晨</div>
-                                <div class="confirmed-shift">林晏孜<br>林妍蓁<br>呂珮禎<br>李嘉欣</div>
-                                <div class="confirmed-shift">林晏孜<br>林妍蓁<br>洪叔妤<br>涂承軒<br>李嘉欣</div>
-                            </div>
-                            <!-- 9/24 -->
-                            <div class="sch-day-col">
-                                <div class="sch-header">9/24<br>(四)</div>
-                                <div class="confirmed-shift"></div>
-                                <div class="confirmed-shift">林芝愛<br>陳姿羽</div>
-                                <div class="confirmed-shift">劉心伃<br>黃珊妮<br>李軒妤<br>林宇鑫<br>陳姿羽<br>林妍蓁<br>祝承鈺</div>
-                                <div class="confirmed-shift">王芷歆<br>黃珊妮<br>李軒妤<br>林宇鑫<br>阮忠孝<br>莊岱諭</div>
-                                <div class="confirmed-shift">阮忠孝<br>林珈年<br>林宇鑫<br>洪叔妤</div>
-                                <div class="confirmed-shift">阮忠孝<br>林珈年<br>呂珮禎</div>
-                                <div class="confirmed-shift">林千又</div>
-                                <div class="confirmed-shift">林千又<br>徐捷<br>翁啟洲</div>
-                            </div>
+                        <!-- 動態自適應網格 -->
+                        <div class="schedule-grid-auto">
+                            <!-- 標題列 -->
+                            <div class="sch-header" style="color:#888;">時間</div>
+                            <div class="sch-header">9/21<br>(一)</div>
+                            <div class="sch-header">9/22<br>(二)</div>
+                            <div class="sch-header">9/23<br>(三)</div>
+                            <div class="sch-header">9/24<br>(四)</div>
+
+                            <!-- 11:00-12:00 -->
+                            <div class="time-label-auto">11:00<br>|<br>12:00</div>
+                            <div class="confirmed-shift">蔡侑恩</div>
+                            <div class="confirmed-shift">區嘉倩</div>
+                            <div class="confirmed-shift">黃庭芸<br>陳姿羽</div>
+                            <div class="confirmed-shift">林芝愛</div>
+
+                            <!-- 12:00-13:00 -->
+                            <div class="time-label-auto">12:00<br>|<br>13:00</div>
+                            <div class="confirmed-shift">洪叔妤<br>李子睿<br>李軒妤<br>祝承鈺</div>
+                            <div class="confirmed-shift">蔡閔帆<br>曹千窈<br>林宇鑫<br>祝承鈺</div>
+                            <div class="confirmed-shift">賴昱蓁<br>劉心伃<br>陳姿羽<br>黃珊妮</div>
+                            <div class="confirmed-shift">劉心伃<br>黃珊妮<br>林妍蓁<br>蔡閔帆</div>
+
+                            <!-- 13:00-14:00 -->
+                            <div class="time-label-auto">13:00<br>|<br>14:00</div>
+                            <div class="confirmed-shift">洪叔妤<br>李子睿<br>李軒妤</div>
+                            <div class="confirmed-shift">蔡閔帆<br>曹千窈<br>林宇鑫</div>
+                            <div class="confirmed-shift">李軒妤<br>王芷歆<br>阮忠孝</div>
+                            <div class="confirmed-shift">劉心伃<br>黃珊妮<br>莊岱諭</div>
+
+                            <!-- 14:00-15:00 -->
+                            <div class="time-label-auto">14:00<br>|<br>15:00</div>
+                            <div class="confirmed-shift">徐蒂亞<br>廖晏晨<br>林珈年</div>
+                            <div class="confirmed-shift">蔡閔帆<br>曹千窈<br>林宇鑫</div>
+                            <div class="confirmed-shift">王芷歆<br>阮忠孝<br>洪叔妤</div>
+                            <div class="confirmed-shift">張予彤</div>
+
+                            <!-- 15:00-16:00 -->
+                            <div class="time-label-auto">15:00<br>|<br>16:00</div>
+                            <div class="confirmed-shift">徐蒂亞<br>廖晏晨<br>林珈年</div>
+                            <div class="confirmed-shift">洪叔妤</div>
+                            <div class="confirmed-shift">王芷歆<br>阮忠孝<br>呂珮禎</div>
+                            <div class="confirmed-shift">張予彤</div>
+
+                            <!-- 16:00-17:00 -->
+                            <div class="time-label-auto">16:00<br>|<br>17:00</div>
+                            <div class="confirmed-shift">蘇苗元<br>呂珮禎<br>林千又</div>
+                            <div class="confirmed-shift">洪叔妤</div>
+                            <div class="confirmed-shift">林晏孜<br>李嘉欣<br>林千又</div>
+                            <div class="confirmed-shift">林妍蓁</div>
+
+                            <!-- 17:00-18:00 -->
+                            <div class="time-label-auto">17:00<br>|<br>18:00</div>
+                            <div class="confirmed-shift">蘇苗元<br>洪叔妤<br>徐捷</div>
+                            <div class="confirmed-shift">欒定濂<br>涂承軒<br>翁啟洲</div>
+                            <div class="confirmed-shift">林晏孜<br>李嘉欣<br>徐捷</div>
+                            <div class="confirmed-shift">林妍蓁</div>
                         </div>
                     </div>
                 </div>
@@ -308,7 +309,7 @@
             <div id="tab-F" class="section">
                 <div class="sticky-header">
                     <h3>顧展輪班填寫</h3>
-                    <p>請點擊下方空堂以排定展期顧展時段</p>
+                    <p>請點擊下方空堂，<strong style="color: var(--sch-red);">請至少選擇 5 個時段</strong><br>（實際排班約安排 2-3 個時段）。</p>
                 </div>
                 <div class="card">
                     <form onsubmit="submitExhibitShift(event)">
@@ -419,10 +420,13 @@
 
     <script>
         // 排班使用的試算表網址
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby3vrsgB1H6YD-PvnNRm1FpszFj_Pf0K98JLoQKtyHK7s_PlOdMecsGnnykb0__vi_JAA/exec'; 
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYM4yRxNwEKZ6tWz5DDXw6QDOg7KX-nzyQOo4oTGRlvIiusP2il9lBJt7FvKvfU6tZ/exec'; 
 
         // 周邊結帳專用 Google Apps Script 網址
         const MERCH_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydSiXySrVs-J5hdkIc5qRlsp0tCO492JTLjWjdlAI6TXGhlPL4mZYuePT-GWGR1FIYQQ/exec';
+        
+        // 顧展排班專用 Google Apps Script 網址 (請填入您顧展試算表的部署網址)
+        const EXHIBIT_SCRIPT_URL = '請在這裡貼上你的_顧展排班_Apps_Script_部署網址';
 
         let currentUser = null;
         let customLinks = JSON.parse(localStorage.getItem('reverie_custom_links') || '{}'); 
@@ -544,9 +548,12 @@
                 document.getElementById('merch-staff-info').value = `${currentUser.group} ${currentUser.name} (${currentUser.id})`;
                 document.getElementById('staff-checkout-area').style.display = 'block';
                 
+                // 顧展排班的人員名稱預設填入 (讓所有人都可見可填)
+                document.getElementById('exhibit-shift-name-popup').value = currentUser.name;
+
                 if(currentUser.role === 'curator') {
                     nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-C', event)">理念/排程</button><button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button><button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button><button class="nav-btn" onclick="switchTab('tab-B', event)">快閃排班</button><button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-F', event)">展期排班</button>`;
-                    document.getElementById('exhibit-shift-name-popup').value = currentUser.name;
+                    document.getElementById('shift-name-popup').value = currentUser.name;
                 } else {
                     nav.innerHTML = `<button class="nav-btn" onclick="switchTab('tab-C', event)">理念/排程</button><button class="nav-btn" onclick="switchTab('tab-D', event)">人員須知</button><button class="nav-btn" onclick="switchTab('tab-E', event)">周邊登記</button><button class="nav-btn" onclick="switchTab('tab-A', event)">展場圖</button><button class="nav-btn" onclick="switchTab('tab-F', event)">展期排班</button>`;
                 }
@@ -916,15 +923,23 @@
                     exhibitSelectedShifts.push(timeStr);
                 }
                 const counterDisplay = document.getElementById('exhibit-shift-count-display');
-                counterDisplay.innerHTML = `目前已選擇：<span style="color: #4CAF50;">${exhibitSelectedShifts.length}</span> 個時段`;
-                counterDisplay.style.color = '#555';
+                
+                // 更新提示：最少5個
+                if (exhibitSelectedShifts.length >= 5) {
+                    counterDisplay.innerHTML = `目前已選擇：<span style="color: #4CAF50;">${exhibitSelectedShifts.length}</span> 個時段 (符合條件)`;
+                    counterDisplay.style.color = '#555';
+                } else {
+                    counterDisplay.innerHTML = `目前已選擇：${exhibitSelectedShifts.length} 個時段 (最少需選 5 個)`;
+                    counterDisplay.style.color = 'var(--sch-red)';
+                }
+                
                 document.getElementById('exhibit-selected-shifts-popup').value = exhibitSelectedShifts.join(', ');
             });
         });
         
         function submitExhibitShift(e) {
             e.preventDefault();
-            if(exhibitSelectedShifts.length === 0) return alert('排班資料不完整：請至少選擇 1 個空堂時段喔！');
+            if(exhibitSelectedShifts.length < 5) return alert('排班資料不完整：請至少選擇 5 個空堂時段喔！');
 
             const submitBtn = e.target.querySelector('.submit-btn');
             submitBtn.innerText = '資料傳送中...';
@@ -936,7 +951,15 @@
             // 加上 (顧展) 前綴
             formData.append('shifts', '(顧展) ' + exhibitSelectedShifts.join(', '));
         
-            fetch(GOOGLE_SCRIPT_URL, {
+            if (typeof EXHIBIT_SCRIPT_URL === 'undefined' || EXHIBIT_SCRIPT_URL.includes('請在這裡貼上')) {
+                alert('請先在程式碼最上方填入顧展排班的 Google Apps Script 網址！');
+                submitBtn.innerText = '送出至 Google 試算表';
+                submitBtn.style.opacity = '1';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            fetch(EXHIBIT_SCRIPT_URL, {
                 method: 'POST',
                 body: formData
             })
@@ -983,4 +1006,5 @@
         }
     </script>
 </body>
+</html>
 </html>
