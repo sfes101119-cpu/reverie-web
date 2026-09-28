@@ -134,6 +134,7 @@
         .merch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
         .merch-item { background: white; border: 1px solid #eee; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
         .merch-img-placeholder { width: 100%; aspect-ratio: 1; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999; }
+        .merch-img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; border-bottom: 1px solid #eee; }
         .merch-info { padding: 10px; display: flex; flex-direction: column; flex-grow: 1; }
         .merch-title { font-size: 13px; font-weight: bold; margin: 0 0 5px 0; color: #333; }
         .merch-price { font-size: 14px; color: var(--sch-red); font-weight: bold; margin: 0; }
@@ -479,14 +480,14 @@
         };
 
         const merchData = [
-            { name: "浮光套餐", price: 149, desc: "鏡面壓克力吊飾+貼紙", stock: 50 },
-            { name: "徽章", price: 40, desc: "尺寸 4x4cm", stock: 50 },
-            { name: "刀模貼紙", price: 69, desc: "尺寸 12x18cm", stock: 50 },
-            { name: "壓克力鏡面吊飾", price: 99, desc: "具備鏡子功能", stock: 50 },
-            { name: "長方形貼紙", price: 0, desc: "將貼於快閃活動調飲上", stock: 320 },
-            { name: "衛生紙", price: 0, desc: "快閃/展場現場獲得", stock: 300 },
-            { name: "酷卡", price: 0, desc: "展場現場獲得", stock: 200 },
-            { name: "導覽三折頁", price: 0, desc: "展場現場獲得", stock: 200 }
+            { name: "浮光套餐", price: 159, desc: "鏡面壓克力吊飾+貼紙", stock: 50, img: "combo.jpg" },
+            { name: "徽章", price: 40, desc: "尺寸 4x4cm", stock: 50, img: "badge.jpg" },
+            { name: "刀模貼紙", price: 69, desc: "尺寸 12x18cm", stock: 50, img: "sticker.jpg" },
+            { name: "壓克力鏡面吊飾", price: 99, desc: "具備鏡子功能", stock: 50, img: "keychain.jpg" },
+            { name: "長方形貼紙", price: 0, desc: "將貼於快閃活動調飲上", stock: 320, img: "" },
+            { name: "衛生紙", price: 0, desc: "快閃/展場現場獲得", stock: 300, img: "" },
+            { name: "酷卡", price: 0, desc: "展場現場獲得", stock: 200, img: "" },
+            { name: "導覽三折頁", price: 0, desc: "展場現場獲得", stock: 200, img: "" }
         ];
 
         // 完全套用舊程式碼的理念（包含作品介紹順序與內容）
@@ -767,15 +768,31 @@
             container.innerHTML = html;
         }
 
-        function renderMerch(type) {
+function renderMerch(type) {
             const list = document.getElementById('merch-list');
             list.innerHTML = '';
             merchData.forEach(item => {
+                // 判斷庫存顯示 (僅工作人員可見)
                 let stockHtml = (type === 'staff') ? `<div class="merch-stock">庫存剩餘: ${item.stock}</div>` : '';
-                list.innerHTML += `<div class="merch-item"><div class="merch-img-placeholder">圖片預留區</div><div class="merch-info"><h5 class="merch-title">${item.name}</h5><p class="merch-price">${item.price > 0 ? '$'+item.price : '免費領取'}</p><p class="merch-desc">${item.desc}</p>${stockHtml}</div></div>`;
+                
+                // 👇 判斷是否有圖片：有圖片就顯示 <img>，沒圖片就顯示原本的「圖片預留區」
+                let imgHtml = item.img !== "" 
+                    ? `<img src="${item.img}" class="merch-img" alt="${item.name}">` 
+                    : `<div class="merch-img-placeholder">圖片預留區</div>`;
+                
+                // 組合 HTML 並印到畫面上
+                list.innerHTML += `
+                    <div class="merch-item">
+                        ${imgHtml}
+                        <div class="merch-info">
+                            <h5 class="merch-title">${item.name}</h5>
+                            <p class="merch-price">${item.price > 0 ? '$'+item.price : '免費領取'}</p>
+                            <p class="merch-desc">${item.desc}</p>
+                            ${stockHtml}
+                        </div>
+                    </div>`;
             });
         }
-
         function updateMerchOptions() {
             const action = document.getElementById('merch-action').value;
             const itemSelect = document.getElementById('merch-item');
